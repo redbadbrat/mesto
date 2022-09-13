@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mesto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Мини-соцсеть для обмена фото из лучших мест мира">
+    <meta name="keywords" content="Путешествия, природа, фотография, фото">
+    <meta name="author" content="Ксения Тельманова">
+    <link rel="stylesheet" href="./pages/index.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <header class="header">
+            <div class="header__logo"></div>
+            <div class="header__line"></div>
+        </header>
+
+        <section class="profile">
+            <img class="profile__avatar">
+            <div class="profile__profile-info">
+                <!--сделала отдельные классы под нейм и статус. если бы это была большая соцсеть, 
+                    нам бы пришлоись их юзать в других местах-->
+                <div class="profile__name-area">
+                    <h3 class="profile__name name"></h3>
+                    <p class="profile__status status"></p>
+                    <button class="profile__edit-button"></button>
+                </div>
+                <button class="profile__add-button"></button>
+            </div>
+        </section>
+
+        <section class="elements">
+            <article class="element">
+                <img class="element__image">
+                <p class="element__caption"></p>
+                <button class="element__like-button"></button>
+            </article>
+        </section>
+
+        <footer class="footer">
+            <p class="footer__copyright"></p>
+        </footer>
+        
+    </div>
+</body>
