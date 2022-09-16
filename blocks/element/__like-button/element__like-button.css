@@ -1,0 +1,21 @@
+.element__like-button {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-image: url(../../../images/heart-shallow.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    border: none;
+    width: 22px;
+    height: 19px;
+    margin: auto 20px 30px auto;
+    display: inline-block;
+    background-color: #FFFFFF;
+}
+
+
+
+.element__like-button:active {
+    background-image: url(../../../images/heart-dark.svg);
+}

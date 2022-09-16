@@ -1,6 +1,8 @@
 /*вендоры*/
 @import url(../vendor/normalize.css);
+@import url(../vendor/fonts/inter.css);
 /*основные блоки*/
+@import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/elements/elements.css);
@@ -9,10 +11,15 @@
 /*элементы*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/__line/header__line.css);
+@import url(../blocks/profile/__name-area/profile__name-area.css);
+@import url(../blocks/profile/__name/profile__name.css);
+@import url(../blocks/profile/__status/profile__status.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__profile-info/profile__profile-info.css);
 @import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__edit-button/profile__edit-button.css);
 @import url(../blocks/element/__image/element__image.css);
+@import url(../blocks/element/__caption-area/element__caption-area.css);
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
