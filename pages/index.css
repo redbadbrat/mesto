@@ -1,13 +1,16 @@
 /*вендоры*/
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/inter.css);
-/*основные блоки*/
+/*основные блоки-разделы*/
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/elements/elements.css);
-@import url(../blocks/element/element.css);
 @import url(../blocks/footer/footer.css);
+@import url(../blocks/popup-name-edit/popup-name-edit.css);
+/*универсальные блоки - повторяющиеся*/
+@import url(../blocks/button/button.css);
+@import url(../blocks/element/element.css);
 /*элементы*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/__line/header__line.css);
@@ -23,3 +26,9 @@
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+@import url(../blocks/popup-name-edit/__container/popup-name-edit__container.css);
+@import url(../blocks/popup-name-edit/__header/popup-name-edit__header.css);
+@import url(../blocks/popup-name-edit/__name/popup-name-edit__name.css);
+@import url(../blocks/popup-name-edit/__status/popup-name-edit__status.css);
+@import url(../blocks/popup-name-edit/__save-button/popup-name-edit__save-button.css);
+/*а тут ничего нет и живут львы*/

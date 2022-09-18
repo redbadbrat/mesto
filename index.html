@@ -25,10 +25,10 @@
                     нам бы пришлоись их юзать в других местах-->
                 <div class="profile__name-area">
                     <h3 class="profile__name name">Жак-Ив Кусто</h3>
-                    <button class="profile__edit-button"></button>
+                    <button class="profile__edit-button button" onclick="openNameEditForm()"></button>
                     <p class="profile__status status">Исследователь океана</p>
                 </div>
-                <button class="profile__add-button"></button>
+                <button class="profile__add-button button"></button>
             </div>
         </section>
 
@@ -37,42 +37,42 @@
                 <img class="element__image" src="./images/Mask Group.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">Фото 1</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
             <article class="element">
                 <img class="element__image" src="./images/Mask Group-1.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">олцаулу</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
             <article class="element">
                 <img class="element__image" src="./images/Mask Group-2.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">ауцдллодауцауцауцауцауцауц</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
             <article class="element">
                 <img class="element__image" src="./images/Mask Group-1.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">ауцауцауцжд</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
             <article class="element">
                 <img class="element__image" src="./images/Mask Group-2.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">ауцацу</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
             <article class="element">
                 <img class="element__image" src="./images/Mask Group.jpg">
                 <div class="element__caption-area">
                     <p class="element__caption">ауцауауц</p>
-                    <button class="element__like-button"></button>
+                    <button class="element__like-button button"></button>
                 </div>
             </article>
         </section>
@@ -81,5 +81,16 @@
             <p class="footer__copyright">&copy; Testo Russia uwu</p>
         </footer>
 
+        <div class="popup-name-edit" id="formNameEdit">
+            <form class="popup-name-edit__container">
+                <h2 class="popup-name-edit__header">Редактировать профиль</h2>
+                <input class="popup-name-edit__name" type="text" placeholder="Жак-Ив Кусто" name="name">
+                <input class="popup-name-edit__status" type="text" placeholder="Исследователь океана" name="status">
+                <button class="popup-name-edit__save-button button" type="submit">Спасти и сохранить</button>
+            </form>
+        </div>
+        
+
     </div>
+    <script src="./scripts/script.js"></script>
 </body>

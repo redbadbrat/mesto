@@ -1,0 +1,9 @@
+.popup-name-edit {
+    display: none;
+    background-color: #000000;
+    position: absolute;
+    width: 430px;
+    height: 330px;
+    left: 425px;
+    top: 195px;
+}
