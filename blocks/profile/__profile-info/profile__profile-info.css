@@ -6,3 +6,10 @@
     padding: auto;
     width: inherit;
 }
+
+@media all and (max-width: 770px) {
+    .profile__profile-info {
+        flex-direction: column;
+        justify-content: center;
+    }    
+}

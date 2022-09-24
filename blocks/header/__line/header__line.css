@@ -1,5 +1,6 @@
 .header__line {
     background-color: #545454;
     height: 1px;
-    width: 880px;
+    max-width: 880px;
+    width: 100%;
 }

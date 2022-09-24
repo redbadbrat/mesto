@@ -1,8 +1,15 @@
 .profile__name-area {
-    width: 336px;
+    max-width: 500px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: flex-start;
     margin-left: 30px;
+}
+
+@media all and (max-width: 770px) {
+    .profile__name-area {
+        align-items: center;
+        margin-left: 0;
+    }
 }

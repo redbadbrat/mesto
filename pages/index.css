@@ -11,10 +11,12 @@
 /*универсальные блоки - повторяющиеся*/
 @import url(../blocks/button/button.css);
 @import url(../blocks/element/element.css);
+@import url(../blocks/popup/popup.css);
 /*элементы*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/header/__line/header__line.css);
 @import url(../blocks/profile/__name-area/profile__name-area.css);
+@import url(../blocks/profile/__first-line/profile__first-line.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__status/profile__status.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
@@ -27,8 +29,10 @@
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup-name-edit/__container/popup-name-edit__container.css);
+@import url(../blocks/popup-name-edit/__form/popup-name-edit__form.css);
 @import url(../blocks/popup-name-edit/__header/popup-name-edit__header.css);
 @import url(../blocks/popup-name-edit/__name/popup-name-edit__name.css);
 @import url(../blocks/popup-name-edit/__status/popup-name-edit__status.css);
 @import url(../blocks/popup-name-edit/__save-button/popup-name-edit__save-button.css);
+@import url(../blocks/popup-name-edit/__close-button/popup-name-edit__close-button.css);
 /*а тут ничего нет и живут львы*/

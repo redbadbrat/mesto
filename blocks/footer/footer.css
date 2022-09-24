@@ -4,3 +4,10 @@
     margin: 66px auto 0 auto;
     padding-bottom: 60px;
 }
+
+@media all and (max-width: 770px) {
+    .footer {
+        margin-top: 48px;
+        padding-bottom: 36px;
+    }
+}

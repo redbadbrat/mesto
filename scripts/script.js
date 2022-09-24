@@ -1,10 +1,30 @@
+//открыть/закрыть форму
+
 function openNameEditForm() {
-    document.getElementById("formNameEdit").style.display = "block";
+    document.getElementById("formPopup").style.display = "block";
   }
   
-function closeForm() {
-    document.getElementById("myForm").style.display = "none";
+function closeNameEditForm() {
+    document.getElementById("formPopup").style.display = "none";
   }
 
-alert("HIIIIIIIII THOMAS UWU");
+//подставить имеющееся значение в инпут
 
+document.getElementById('inputName').value = document.getElementById('hName').textContent;
+document.getElementById('inputStatus').value = document.getElementById('pStatus').textContent;
+
+//заменить содержимое в элементах профиля на инпуты
+
+function placeInputs() {
+  let name = document.getElementById('inputName').value;
+  console.log(name);
+  let status = document.getElementById('inputStatus').value;
+  console.log(status);
+  document.getElementById('hName').textContent = name;
+  document.getElementById('pStatus').textContent = status;
+  closeNameEditForm();
+}
+
+//клик-клик
+
+submitButton.addEventListener('click', placeInputs);

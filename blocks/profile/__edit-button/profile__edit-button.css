@@ -12,3 +12,10 @@
     border: 1px #FFFFFF solid;
     display: inline-block;
 }
+
+@media all and (max-width: 770px) { 
+    .profile__edit-button {
+        width: 18px;
+        height: 18px;
+    }
+}

@@ -5,3 +5,19 @@
     max-width: 880px;
     width: 100%;
 }
+
+
+@media all and (max-width: 920px) {
+    .profile {
+        max-width: 700px;
+    }
+}
+
+@media all and (max-width: 770px) {
+    .profile {
+        flex-direction: column;
+        margin-top: 42px;
+        max-width: 282px;
+        align-items: center;
+    }
+}

@@ -1,0 +1,23 @@
+.popup-name-edit__close-button {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    background-image: url(../../../images/close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    border: none;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    background-color: transparent;
+    align-self: end;
+}
+
+@media all and (max-width: 770px) {
+    .popup-name-edit__close-button {
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+    }
+}

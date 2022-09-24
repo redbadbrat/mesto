@@ -7,3 +7,18 @@
     row-gap: 20px;
     grid-template-columns: repeat(3, 1fr);
 }
+
+@media all and (max-width: 980px) {
+    .elements {
+        grid-template-columns: repeat(2, 1fr);
+        justify-items: center;
+        column-gap: 1%;
+        margin: 38px auto 0 auto;
+    }
+}
+
+@media all and (max-width: 600px) {
+    .elements {
+        grid-template-columns: 1fr;
+    }
+}

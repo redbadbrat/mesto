@@ -1,0 +1,30 @@
+.popup-name-edit__save-button {
+    max-width: 358px;
+    width: 100%;
+    height: 50px;
+    margin-left: 36px;
+    margin-top: 48px;
+    margin-bottom: 37px;
+    background-color: #000000;
+    border: none;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0;
+}
+
+@media all and (max-width: 770px) {
+    .popup-name-edit__save-button {
+        margin-left: 22px;
+        margin-top: 45px;
+        margin-bottom: 25px;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        max-width: 238px;
+    }
+}
