@@ -1,3 +1,8 @@
+//подставить имеющееся значение в инпут
+
+document.getElementById('inputName').value = document.getElementById('hName').textContent;
+document.getElementById('inputStatus').value = document.getElementById('pStatus').textContent;
+
 //открыть/закрыть форму
 
 function openNameEditForm() {
@@ -7,11 +12,6 @@ function openNameEditForm() {
 function closeNameEditForm() {
     document.getElementById("formPopup").style.display = "none";
   }
-
-//подставить имеющееся значение в инпут
-
-document.getElementById('inputName').value = document.getElementById('hName').textContent;
-document.getElementById('inputStatus').value = document.getElementById('pStatus').textContent;
 
 //заменить содержимое в элементах профиля на инпуты
 
@@ -27,4 +27,6 @@ function placeInputs() {
 
 //клик-клик
 
+openPopupButton.addEventListener('click', openNameEditForm);
+closePopupButton.addEventListener('click', closeNameEditForm);
 submitButton.addEventListener('click', placeInputs);
