@@ -1,12 +1,9 @@
 .popup-name-edit {
-/*    max-width: 470px;
-    width: 100%;
-    height: 370px;*/
+    height: fit-content;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    margin: 155px auto 0 auto;
+    margin: auto;
     max-width: 510px;
     width: 100%;
 }
@@ -14,6 +11,5 @@
 @media all and (max-width: 770px) {
     .popup-name-edit {
         max-width: 282px;
-        margin-top: 87px;
     }
 }

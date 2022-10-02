@@ -1,5 +1,6 @@
 .element__caption-area {
-    margin: 0 0 32px 21px;
+    margin: 0;
+    margin: 22px 0 0px 21px;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;

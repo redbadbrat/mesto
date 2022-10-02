@@ -1,32 +1,49 @@
-//подставить имеющееся значение в инпут
+//привет! если честно, в прошлый раз задание я до конца не читала. в этот раз дочитала. вроде. и спасибо за подсказки по коду! 
+//инпуты
 
-document.getElementById('inputName').value = document.getElementById('hName').textContent;
-document.getElementById('inputStatus').value = document.getElementById('pStatus').textContent;
+let formName = document.getElementById('formName');
+let nameInput = document.getElementById('inputName');
+let statusInput = document.getElementById('inputStatus');
 
-//открыть/закрыть форму
+//кнопки
+
+let openPopupButton = document.getElementById('openPopupButton');
+let closePopupButton = document.getElementById('closePopupButton');
+
+//поп-кошка
+
+let popup = document.getElementById('formPopup');
+
+//заголовки со статусом/именем
+
+let hName = document.getElementById('hName');
+let hStatus = document.getElementById('hStatus');
+
+//ОТКРЫТЬ ВОРОТА!
 
 function openNameEditForm() {
-    document.getElementById("formPopup").style.display = "block";
-  }
-  
-function closeNameEditForm() {
-    document.getElementById("formPopup").style.display = "none";
-  }
-
-//заменить содержимое в элементах профиля на инпуты
-
-function placeInputs() {
-  let name = document.getElementById('inputName').value;
-  console.log(name);
-  let status = document.getElementById('inputStatus').value;
-  console.log(status);
-  document.getElementById('hName').textContent = name;
-  document.getElementById('pStatus').textContent = status;
-  closeNameEditForm();
+  popup.classList.add('popup_opened');
+  nameInput.value = hName.textContent;
+  statusInput.value = hStatus.textContent;
 }
 
-//клик-клик
+//ЗАКРЫТЬ ВОРОТА!
+
+function closeNameEditForm() {
+  popup.classList.remove('popup_opened');
+}
+
+//ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
+
+function placeInputs (evt) {
+    evt.preventDefault();
+    hName.textContent = nameInput.value;
+    hStatus.textContent = statusInput.value;
+    closeNameEditForm();
+}
 
 openPopupButton.addEventListener('click', openNameEditForm);
 closePopupButton.addEventListener('click', closeNameEditForm);
-submitButton.addEventListener('click', placeInputs);
+nameForm.addEventListener('submit', placeInputs);
+
+//а в школьные годы с++ для начинающих давался мне легче. старею.

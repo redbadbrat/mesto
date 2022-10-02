@@ -1,6 +1,6 @@
 .profile__status {
     margin: 16px 0 0 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -8,6 +8,7 @@
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
+    max-width: 400px;
 }
 
 @media all and (max-width: 770px) {

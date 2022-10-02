@@ -3,9 +3,3 @@
     flex-direction: row;
     align-items: flex-end;
 }
-
-@media all and (max-width: 770px) {
-    .profile__first-line {
-        
-    }    
-}

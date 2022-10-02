@@ -5,4 +5,6 @@
     flex-direction: column;
     max-width: 880px;
     width: 100%;
+    border-bottom: 1px rgba(84, 84, 84, .7) solid;
+    padding: 0;
 }

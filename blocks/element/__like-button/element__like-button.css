@@ -9,13 +9,17 @@
     border: none;
     width: 22px;
     height: 19px;
-    margin: auto 20px 30px auto;
+    margin: 0 20px 0 auto;
     display: inline-block;
     background-color: #FFFFFF;
 }
 
-
+.element__like-button:hover {
+    opacity: 0.5;
+    /*т.к. элементы блоков перезаписывают универсальные классы (в духе button), я просто добавила отдельное опасити тут*/
+}
 
 .element__like-button:active {
+    opacity: 1;
     background-image: url(../../../images/heart-dark.svg);
 }

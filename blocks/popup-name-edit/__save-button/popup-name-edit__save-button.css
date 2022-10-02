@@ -7,7 +7,7 @@
     margin-bottom: 37px;
     background-color: #000000;
     border: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -15,6 +15,10 @@
     text-align: center;
     color: #FFFFFF;
     padding: 0;
+}
+
+.popup-name-edit__save-button:hover {
+    opacity: .8;
 }
 
 @media all and (max-width: 770px) {
