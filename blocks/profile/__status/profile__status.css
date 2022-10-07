@@ -11,6 +11,12 @@
     max-width: 400px;
 }
 
+@media all and (max-width: 920px) {
+    .profile__status { 
+        max-width: 330px;
+    }
+}
+
 @media all and (max-width: 770px) {
     .profile__status {
         font-size: 14px;
@@ -18,4 +24,10 @@
         margin-top: 14px;
         margin-bottom: 36px;
     } 
+}
+
+@media all and (max-width: 400px) {
+    .profile__status { 
+        max-width: 240px;
+    }
 }

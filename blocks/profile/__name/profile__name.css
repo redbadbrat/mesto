@@ -13,6 +13,12 @@
     text-overflow: ellipsis;
 }
 
+@media all and (max-width: 920px) {
+    .profile__name { 
+        max-width: 330px;
+    }
+}
+
 @media all and (max-width: 770px) {
     .profile__name {
         font-size: 27px;
@@ -21,4 +27,10 @@
         margin: 0 10px -6px 28px;
 
     }    
+}
+
+@media all and (max-width: 400px) {
+    .profile__name { 
+        max-width: 240px;
+    }
 }
