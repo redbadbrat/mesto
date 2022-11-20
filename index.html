@@ -30,11 +30,11 @@
                     <div class="profile__name-area">
                         <div class="profile__first-line">
                             <h1 class="profile__name name" id="hName">Жак-Ив Кусто</h1>
-                            <button class="profile__edit-button button" id="openPopupButton" type="button"></button>
+                            <button class="profile__edit-button button" id="openNamePopupButton" type="button"></button>
                         </div>
                         <p class="profile__status status" id="hStatus">Исследователь океана</p>
                     </div>
-                    <button class="profile__add-button button" type="button"></button>
+                    <button class="profile__add-button button" id="openAddPopupButton" type="button"></button>
                 </div>
             </section>
 
@@ -81,15 +81,17 @@
                         <button class="element__like-button button" type="button"></button>
                     </div>
                 </article>
+                
             </section>
 
         </main>
 
         <footer class="footer">
-            <p class="footer__copyright">&copy; 2022 Testo Russia</p>
+            <p class="footer__copyright">&copy; 2022 Testo Russia + MidJourney = &#10084;</p>
         </footer>
 
         <!--идеи для занимательного рефакторинга: переписать к чертям собачьим классы инпутом, а то бардак-->
+        <!--поп-ап данных автора страницы-->
 
         <div class="popup" id="formPopup">
             <div class="popup-name-edit">
@@ -100,6 +102,23 @@
                         <input class="input" type="text" placeholder="Имя" name="name" id="inputName">
                         <input class="input" type="text" placeholder="О себе" name="status" id="inputStatus">
                         <button class="popup-name-edit__save-button button" type="submit" id="submitButton">Сохранить
+                        </button> <!--эх-->
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--поп-ап добавления картинки-->
+
+        <div class="popup" id="formPopup">
+            <div class="popup-add">
+                <button class="popup-add__close-button button" type="button" id="closePopupButton"></button>
+                <div class="popup-add__container">
+                    <h2 class="popup-add__header">Новое место</h2>
+                    <form class="popup-add__form" name="form" method="post" id="formAddPic">
+                        <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName">
+                        <input class="input" type="text" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink">
+                        <button class="popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
                         </button> <!--эх-->
                     </form>
                 </div>

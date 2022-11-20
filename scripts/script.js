@@ -1,14 +1,18 @@
 //привет! если честно, в прошлый раз задание я до конца не читала. в этот раз дочитала. вроде. и спасибо за подсказки по коду! 
 //инпуты
 
-let formName = document.getElementById('formName');
-let nameInput = document.getElementById('inputName');
-let statusInput = document.getElementById('inputStatus');
+const formName = document.getElementById('formName');
+const nameInput = document.getElementById('inputName');
+const statusInput = document.getElementById('inputStatus');
+const formAddPic = document.getElementById('formAddPic');
+const inputPicName = document.getElementById('inputPicName');
+const inputPicLink = document.getElementById('inputPicLink');
 
 //кнопки
 
-let openPopupButton = document.getElementById('openPopupButton');
-let closePopupButton = document.getElementById('closePopupButton');
+const openNamePopupButton = document.getElementById('openNamePopupButton');
+const openAddPopupButton = document.getElementById('openAddPopupButton');
+const closePopupButton = document.getElementById('closePopupButton');
 
 //поп-кошка
 
@@ -16,8 +20,37 @@ let popup = document.getElementById('formPopup');
 
 //заголовки со статусом/именем
 
-let hName = document.getElementById('hName');
-let hStatus = document.getElementById('hStatus');
+const hName = document.getElementById('hName');
+const hStatus = document.getElementById('hStatus');
+
+//картиночки.......
+
+const initialCards = [
+  {
+    name: 'Архыз',
+    link: '../../../../images/samples/arkhyz.png'
+  },
+  {
+    name: 'Озеро Байкал',
+    link: '../../../../images/samples/baikal.png'
+  },
+  {
+    name: 'Эльбрус',
+    link: '../../../../images/samples/elbrus.png'
+  },
+  {
+    name: 'Карелия',
+    link: '../../../../images/samples/karelia.png'
+  },
+  {
+    name: 'Сахалин',
+    link: '../../../../images/samples/sakhalyn.png'
+  },
+  {
+    name: 'Териберка, Мурманская область',
+    link: '../../../../images/samples/teriberka.png'
+  }
+]; 
 
 //ОТКРЫТЬ ВОРОТА!
 
@@ -25,6 +58,12 @@ function openNameEditForm() {
   popup.classList.add('popup_opened');
   nameInput.value = hName.textContent;
   statusInput.value = hStatus.textContent;
+}
+
+function openAddPicForm() {
+  popup.classList.add('popup_opened');
+  //nameInput.value = hName.textContent;
+  //statusInput.value = hStatus.textContent;
 }
 
 //ЗАКРЫТЬ ВОРОТА!
@@ -42,7 +81,8 @@ function placeInputs (evt) {
     closeNameEditForm();
 }
 
-openPopupButton.addEventListener('click', openNameEditForm);
+openNamePopupButton.addEventListener('click', openNameEditForm);
+openAddPopupButton.addEventListener('click', openAddPopupButton);
 closePopupButton.addEventListener('click', closeNameEditForm);
 nameForm.addEventListener('submit', placeInputs);
 
