@@ -28,32 +28,32 @@ const hStatus = document.getElementById('hStatus');
 const startingCards = [
   {
     name: 'Архыз',
-    link: '../../../../images/samples/arkhyz.png',
+    link: './images/samples/arkhyz.png',
     alt: 'барашки на фоне летних гор'
   },
   {
     name: 'Озеро Байкал',
-    link: '../../../../images/samples/baikal.png',
+    link: './images/samples/baikal.png',
     alt: 'замёрзшее озеро Байкал'
   },
   {
     name: 'Эльбрус',
-    link: '../../../../images/samples/elbrus.png',
+    link: './images/samples/elbrus.png',
     alt: 'деревня на фоне горы Эльбрус'
   },
   {
     name: 'Карелия',
-    link: '../../../../images/samples/karelia.png',
+    link: './images/samples/karelia.png',
     alt: 'палатка в лесу и поле морошки'
   },
   {
     name: 'Сахалин',
-    link: '../../../../images/samples/sakhalyn.png',
+    link: './images/samples/sakhalyn.png',
     alt: 'столб пепла после извержения вулкана'
   },
   {
     name: 'Териберка, Мурманская область',
-    link: '../../../../images/samples/teriberka.png',
+    link: './images/samples/teriberka.png',
     alt: 'рыбаки в лодках на фоне северного сияния'
   }
 ]; 
