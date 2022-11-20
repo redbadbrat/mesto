@@ -1,4 +1,4 @@
-//привет! если честно, в прошлый раз задание я до конца не читала. в этот раз дочитала. вроде. и спасибо за подсказки по коду! 
+//привет! я едва понимаю, что тут происходит, поэтому всё в комментах
 //инпуты
 
 const formName = document.getElementById('formName');
@@ -25,32 +25,51 @@ const hStatus = document.getElementById('hStatus');
 
 //картиночки.......
 
-const initialCards = [
+const startingCards = [
   {
     name: 'Архыз',
-    link: '../../../../images/samples/arkhyz.png'
+    link: '../../../../images/samples/arkhyz.png',
+    alt: 'барашки на фоне летних гор'
   },
   {
     name: 'Озеро Байкал',
-    link: '../../../../images/samples/baikal.png'
+    link: '../../../../images/samples/baikal.png',
+    alt: 'замёрзшее озеро Байкал'
   },
   {
     name: 'Эльбрус',
-    link: '../../../../images/samples/elbrus.png'
+    link: '../../../../images/samples/elbrus.png',
+    alt: 'деревня на фоне горы Эльбрус'
   },
   {
     name: 'Карелия',
-    link: '../../../../images/samples/karelia.png'
+    link: '../../../../images/samples/karelia.png',
+    alt: 'палатка в лесу и поле морошки'
   },
   {
     name: 'Сахалин',
-    link: '../../../../images/samples/sakhalyn.png'
+    link: '../../../../images/samples/sakhalyn.png',
+    alt: 'столб пепла после извержения вулкана'
   },
   {
     name: 'Териберка, Мурманская область',
-    link: '../../../../images/samples/teriberka.png'
+    link: '../../../../images/samples/teriberka.png',
+    alt: 'рыбаки в лодках на фоне северного сияния'
   }
 ]; 
+
+//копирование темплейта, наполнение контентом, вставка, 6 раз
+
+for (let i = 0; i < startingCards.length; i++) {
+  const cardTemplate = document.getElementById('card').content; 
+  const cardZone = document.querySelector('.elements');
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__image').src = startingCards[i].link;
+  cardElement.querySelector('.element__image').alt = startingCards[i].alt;
+  cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
+  cardZone.append(cardElement); 
+  console.log('it worked'+i);
+  } 
 
 //ОТКРЫТЬ ВОРОТА!
 
