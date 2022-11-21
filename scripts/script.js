@@ -4,19 +4,25 @@
 const formName = document.getElementById('formName');
 const nameInput = document.getElementById('inputName');
 const statusInput = document.getElementById('inputStatus');
-const formAddPic = document.getElementById('formAddPic');
 const inputPicName = document.getElementById('inputPicName');
 const inputPicLink = document.getElementById('inputPicLink');
+
+//зона карточек и темлпейт
+
+const cardTemplate = document.getElementById('card').content; 
+const cardZone = document.querySelector('.elements');
 
 //кнопки
 
 const openNamePopupButton = document.getElementById('openNamePopupButton');
 const openAddPopupButton = document.getElementById('openAddPopupButton');
 const closePopupButton = document.getElementById('closePopupButton');
+const closeAddPopupButton = document.getElementById('closeAddPopupButton');
 
 //поп-кошка
 
 let popup = document.getElementById('formPopup');
+let popupCard = document.getElementById('formPopupCard');
 
 //заголовки со статусом/именем
 
@@ -61,8 +67,6 @@ const startingCards = [
 //копирование темплейта, наполнение контентом, вставка, 6 раз
 
 for (let i = 0; i < startingCards.length; i++) {
-  const cardTemplate = document.getElementById('card').content; 
-  const cardZone = document.querySelector('.elements');
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   cardElement.querySelector('.element__image').src = startingCards[i].link;
   cardElement.querySelector('.element__image').alt = startingCards[i].alt;
@@ -80,9 +84,7 @@ function openNameEditForm() {
 }
 
 function openAddPicForm() {
-  popup.classList.add('popup_opened');
-  //nameInput.value = hName.textContent;
-  //statusInput.value = hStatus.textContent;
+  popupCard.classList.add('popup_opened');
 }
 
 //ЗАКРЫТЬ ВОРОТА!
@@ -91,18 +93,38 @@ function closeNameEditForm() {
   popup.classList.remove('popup_opened');
 }
 
+function closeAddPicForm() {
+  popupCard.classList.remove('popup_opened');
+}
+
+
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
 
 function placeInputs (evt) {
-    evt.preventDefault();
-    hName.textContent = nameInput.value;
-    hStatus.textContent = statusInput.value;
-    closeNameEditForm();
+  evt.preventDefault();
+  hName.textContent = nameInput.value;
+  hStatus.textContent = statusInput.value;
+  closeNameEditForm();
+}
+
+function addPic (evt) {
+  evt.preventDefault();
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__caption').textContent = inputPicName.value;
+  cardElement.querySelector('.element__image').src = inputPicLink.value;
+  cardZone.prepend(cardElement);
+  closeAddPicForm();
+}
+
+function paintItBlack (evt) {
+  evt.preventDefault();
 }
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
-openAddPopupButton.addEventListener('click', openAddPopupButton);
+openAddPopupButton.addEventListener('click', openAddPicForm);
 closePopupButton.addEventListener('click', closeNameEditForm);
+closeAddPopupButton.addEventListener('click', closeAddPicForm);
+formAddPic.addEventListener('submit', addPic);
 nameForm.addEventListener('submit', placeInputs);
 
 //а в школьные годы с++ для начинающих давался мне легче. старею.

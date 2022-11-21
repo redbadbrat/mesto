@@ -109,17 +109,18 @@
         </div>
 
         <!--поп-ап добавления картинки-->
+        <!--проблема нейминга - придумать что-нибудь для popup-name-blah-blah, универсальное-->
 
-        <div class="popup" id="formPopup">
-            <div class="popup-add">
-                <button class="popup-add__close-button button" type="button" id="closePopupButton"></button>
-                <div class="popup-add__container">
-                    <h2 class="popup-add__header">Новое место</h2>
-                    <form class="popup-add__form" name="form" method="post" id="formAddPic">
+        <div class="popup" id="formPopupCard">
+            <div class="popup-name-edit">
+                <button class="popup-name-edit__close-button button" type="button" id="closeAddPopupButton"></button>
+                <div class="popup-name-edit__container">
+                    <h2 class="popup-name-edit__header">Новое место</h2>
+                    <form class="popup-name-edit__form" name="form" method="post" id="formAddPic">
                         <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName">
                         <input class="input" type="text" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink">
-                        <button class="popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
-                        </button> <!--эх-->
+                        <button class="popup-name-edit__save-button button" type="submit" id="addPicSubmitButton">Создать
+                        </button>
                     </form>
                 </div>
             </div>
