@@ -18,6 +18,7 @@ const openNamePopupButton = document.getElementById('openNamePopupButton');
 const openAddPopupButton = document.getElementById('openAddPopupButton');
 const closePopupButton = document.getElementById('closePopupButton');
 const closeAddPopupButton = document.getElementById('closeAddPopupButton');
+const like = document.getElementById('like');
 
 //поп-кошка
 
@@ -118,12 +119,17 @@ function addPic (evt) {
 
 function paintItBlack (evt) {
   evt.preventDefault();
+  const cardElement = cardTemplate.querySelector('.element');
+  let likeClicked = cardElement.querySelector('element__like-button');
+  likeClicked.classList.toggle('element__like-button_clicked');
 }
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', openAddPicForm);
 closePopupButton.addEventListener('click', closeNameEditForm);
 closeAddPopupButton.addEventListener('click', closeAddPicForm);
+like.addEventListener('click', paintItBlack);
+
 formAddPic.addEventListener('submit', addPic);
 nameForm.addEventListener('submit', placeInputs);
 

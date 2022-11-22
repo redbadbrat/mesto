@@ -40,4 +40,5 @@
 @import url(../blocks/popup-add/__close-button/popup-add__close-button.css);
 /*модификаторы состояний*/
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/element/__like-button/_clicked/_clicked.css)
 /*а тут ничего нет и живут львы*/
