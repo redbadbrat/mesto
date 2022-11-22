@@ -65,17 +65,6 @@ const startingCards = [
   }
 ]; 
 
-//копирование темплейта, наполнение контентом, вставка, 6 раз
-
-for (let i = 0; i < startingCards.length; i++) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__image').src = startingCards[i].link;
-  cardElement.querySelector('.element__image').alt = startingCards[i].alt;
-  cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
-  cardZone.append(cardElement); 
-  console.log('it worked'+i);
-  } 
-
 //ОТКРЫТЬ ВОРОТА!
 
 function openNameEditForm() {
@@ -114,21 +103,37 @@ function addPic (evt) {
   cardElement.querySelector('.element__caption').textContent = inputPicName.value;
   cardElement.querySelector('.element__image').src = inputPicLink.value;
   cardZone.prepend(cardElement);
+  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
   closeAddPicForm();
 }
 
-function paintItBlack (evt) {
-  evt.preventDefault();
-  const cardElement = cardTemplate.querySelector('.element');
-  let likeClicked = cardElement.querySelector('element__like-button');
-  likeClicked.classList.toggle('element__like-button_clicked');
+//мину
+
+function paintItBlack (event) {
+
+  event.target.classList.toggle('element__like-button_clicked');
+  
+  //let likeClicked = document.querySelector('element__like-button');
+  //likeClicked.classList.toggle('element__like-button_clicked');
 }
+
+//копирование темплейта, наполнение контентом, вставка, 6 раз
+
+for (let i = 0; i < startingCards.length; i++) {
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  cardElement.querySelector('.element__image').src = startingCards[i].link;
+  cardElement.querySelector('.element__image').alt = startingCards[i].alt;
+  cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
+  cardZone.append(cardElement);
+  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
+  console.log('it worked'+i);
+  } 
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', openAddPicForm);
 closePopupButton.addEventListener('click', closeNameEditForm);
 closeAddPopupButton.addEventListener('click', closeAddPicForm);
-like.addEventListener('click', paintItBlack);
+//like.addEventListener('click', paintItBlack);
 
 formAddPic.addEventListener('submit', addPic);
 nameForm.addEventListener('submit', placeInputs);
