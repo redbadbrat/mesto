@@ -1,4 +1,4 @@
-//привет! я едва понимаю, что тут происходит, поэтому всё в комментах
+//привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
 //инпуты
 
 const formName = document.getElementById('formName');
@@ -18,7 +18,6 @@ const openNamePopupButton = document.getElementById('openNamePopupButton');
 const openAddPopupButton = document.getElementById('openAddPopupButton');
 const closePopupButton = document.getElementById('closePopupButton');
 const closeAddPopupButton = document.getElementById('closeAddPopupButton');
-const like = document.getElementById('like');
 
 //поп-кошка
 
@@ -96,6 +95,20 @@ function placeInputs (evt) {
   hStatus.textContent = statusInput.value;
   closeNameEditForm();
 }
+//нужно перестать работать мемами и давать нормальные название. это лайк
+
+function paintItBlack (event) {
+  event.target.classList.toggle('element__like-button_clicked');
+}
+
+//удоли
+
+function deleteCard(event) {
+  event.target.closest(".element").remove();
+}
+
+//добавление картинки через попап аддПик - стоило его написать однажды и потом юзать при загрузке странице тоже,
+//они друг друга почти полностью копируют. но я запуталась
 
 function addPic (evt) {
   evt.preventDefault();
@@ -104,20 +117,12 @@ function addPic (evt) {
   cardElement.querySelector('.element__image').src = inputPicLink.value;
   cardZone.prepend(cardElement);
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard); 
   closeAddPicForm();
 }
 
-//мину
-
-function paintItBlack (event) {
-
-  event.target.classList.toggle('element__like-button_clicked');
-  
-  //let likeClicked = document.querySelector('element__like-button');
-  //likeClicked.classList.toggle('element__like-button_clicked');
-}
-
-//копирование темплейта, наполнение контентом, вставка, 6 раз
+//копирование темплейта, наполнение контентом, вставка, 6 раз, костыль - накрутка кнопок внутри цикла. брух.
+//known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
 
 for (let i = 0; i < startingCards.length; i++) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -125,7 +130,8 @@ for (let i = 0; i < startingCards.length; i++) {
   cardElement.querySelector('.element__image').alt = startingCards[i].alt;
   cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
   cardZone.append(cardElement);
-  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
+  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack);
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);  
   console.log('it worked'+i);
   } 
 
@@ -133,7 +139,8 @@ openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', openAddPicForm);
 closePopupButton.addEventListener('click', closeNameEditForm);
 closeAddPopupButton.addEventListener('click', closeAddPicForm);
-//like.addEventListener('click', paintItBlack);
+
+//изменение контента в кардЗоне
 
 formAddPic.addEventListener('submit', addPic);
 nameForm.addEventListener('submit', placeInputs);

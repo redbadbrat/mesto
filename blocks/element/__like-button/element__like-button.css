@@ -13,6 +13,7 @@
     display: inline-block;
     background-color: #FFFFFF;
     transition: all .2s ease-in-out;
+    fill: none;
 }
 
 .element__like-button:hover {
