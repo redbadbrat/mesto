@@ -48,7 +48,7 @@ const startingCards = [
   },
   {
     name: 'Эльбрус',
-    link: './images/samples/elbrus.png',
+    link: './images/samples/elbrus.jpg',
     alt: 'деревня на фоне горы Эльбрус'
   },
   {
