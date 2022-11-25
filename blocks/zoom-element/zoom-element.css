@@ -1,0 +1,8 @@
+.zoom-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 0;
+    border: none;
+}

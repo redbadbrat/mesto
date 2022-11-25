@@ -15,6 +15,7 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/input/input.css);
+@import url(../blocks/zoom-element/zoom-element.css);
 /*элементы*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/__name-area/profile__name-area.css);
@@ -30,6 +31,7 @@
 @import url(../blocks/element/__caption/element__caption.css);
 @import url(../blocks/element/__like-button/element__like-button.css);
 @import url(../blocks/element/__delete-button/element__delete-button.css);
+@import url(../blocks/element/__image-overlay/element__image-overlay.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup-name-edit/__container/popup-name-edit__container.css);
 @import url(../blocks/popup-name-edit/__header/popup-name-edit__header.css);
@@ -39,6 +41,9 @@
 @import url(../blocks/popup-add/__header/popup-add__header.css);
 @import url(../blocks/popup-add/__save-button/popup-add__save-button.css);
 @import url(../blocks/popup-add/__close-button/popup-add__close-button.css);
+@import url(../blocks/zoom-element/__caption/zoom-element__caption.css);
+@import url(../blocks/zoom-element/__picture/zoom-element__picture.css);
+@import url(../blocks/zoom-element/__container/zoom-element__container.css);
 /*модификаторы состояний*/
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/element/__like-button/_clicked/element__like-button_clicked.css);

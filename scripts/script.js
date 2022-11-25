@@ -6,6 +6,8 @@ const nameInput = document.getElementById('inputName');
 const statusInput = document.getElementById('inputStatus');
 const inputPicName = document.getElementById('inputPicName');
 const inputPicLink = document.getElementById('inputPicLink');
+let zoomPic = document.querySelector('.zoom-element__picture').src;
+let zoomCaption = document.querySelector('.zoom-element__caption').textContent;
 
 //зона карточек и темлпейт
 
@@ -18,11 +20,13 @@ const openNamePopupButton = document.getElementById('openNamePopupButton');
 const openAddPopupButton = document.getElementById('openAddPopupButton');
 const closePopupButton = document.getElementById('closePopupButton');
 const closeAddPopupButton = document.getElementById('closeAddPopupButton');
+const closeZoomPopupOverlay = document.getElementById('closeZoomPopupOverlay');
 
 //поп-кошка
 
 let popup = document.getElementById('formPopup');
 let popupCard = document.getElementById('formPopupCard');
+let popupZoom = document.getElementById('zoomPopup');
 
 //заголовки со статусом/именем
 
@@ -65,6 +69,7 @@ const startingCards = [
 ]; 
 
 //ОТКРЫТЬ ВОРОТА!
+//идея для рефакторинга этого куска к. - слить формы воедино
 
 function openNameEditForm() {
   popup.classList.add('popup_opened');
@@ -72,8 +77,12 @@ function openNameEditForm() {
   statusInput.value = hStatus.textContent;
 }
 
-function openAddPicForm() {
+function openPopupCard() {
   popupCard.classList.add('popup_opened');
+}
+
+function openPopupZoom() {
+  popupZoom.classList.add('popup_opened');
 }
 
 //ЗАКРЫТЬ ВОРОТА!
@@ -86,6 +95,9 @@ function closeAddPicForm() {
   popupCard.classList.remove('popup_opened');
 }
 
+function closeZoomPopup() {
+  popupZoom.classList.remove('popup_opened');
+}
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
 
@@ -117,7 +129,8 @@ function addPic (evt) {
   cardElement.querySelector('.element__image').src = inputPicLink.value;
   cardZone.prepend(cardElement);
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard); 
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
+  cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
   closeAddPicForm();
 }
 
@@ -130,15 +143,24 @@ for (let i = 0; i < startingCards.length; i++) {
   cardElement.querySelector('.element__image').alt = startingCards[i].alt;
   cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
   cardZone.append(cardElement);
+
+//
+  document.querySelector('.zoom-element__caption').textContent = cardElement.querySelector('.element__caption').textContent;
+  document.querySelector('.zoom-element__picture').src = cardElement.querySelector('.element__image').src;
+//
+
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack);
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);  
+  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
+  cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);  
   console.log('it worked'+i);
   } 
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
-openAddPopupButton.addEventListener('click', openAddPicForm);
+openAddPopupButton.addEventListener('click', openPopupCard);
+closeZoomPopupOverlay.addEventListener('click', closeZoomPopup);
 closePopupButton.addEventListener('click', closeNameEditForm);
 closeAddPopupButton.addEventListener('click', closeAddPicForm);
+
 
 //изменение контента в кардЗоне
 

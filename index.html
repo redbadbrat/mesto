@@ -130,6 +130,7 @@
         <template id="card">
             <article class="element">
                 <img class="element__image" src="" alt="">
+                <button class="element__image-overlay"></button>
                 <button class="element__delete-button button" type="button" id="delete"></button>
                 <div class="element__caption-area">
                     <h2 class="element__caption"></h2>
@@ -137,6 +138,18 @@
                 </div>
             </article>
         </template>
+
+            <div class="popup" id="zoomPopup">
+                <div class="zoom-element">
+                    <!--ошибка дожившего до пр5 - проблема в названии крестиков-->
+                    <button class="popup-name-edit__close-button button" type="button" id="closeZoomPopupOverlay"></button>
+                    <div class="zoom-element__container">
+                        <img class="zoom-element__picture" src="">
+                        <h3 class="zoom-element__caption"></h3>
+                    </div>
+                </div>
+            </div>
+
         
 
     </div>

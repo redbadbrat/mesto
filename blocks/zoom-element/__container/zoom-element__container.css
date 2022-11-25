@@ -1,0 +1,13 @@
+.zoom-element__container {
+    margin-top: 8px;
+    margin-right: 40px;
+    align-self: center;
+    justify-self: center;
+}
+
+@media all and (max-width: 770px) {
+    .zoom-element__container {
+        margin-top: 16px;
+        margin-right: 0;
+    }
+}
