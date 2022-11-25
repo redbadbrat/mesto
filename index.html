@@ -38,50 +38,7 @@
                 </div>
             </section>
 
-            <section class="elements">
-                <!--<article class="element">
-                    <img class="element__image" src="./images/Mask1Group.jpg" alt="одно из ваших фото в галерее">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Карачаевск</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__image" src="./images/Mask1Group-1.jpg" alt="одно из ваших фото в галерее">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Гора Эльбрус</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__image" src="./images/Mask1Group-2.jpg" alt="одно из ваших фото в галерее">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Домбай</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__image" src="./images/Mask1Group-1.jpg" alt="одно из ваших фото в галерее">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Гора Эльбрус</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__image" src="./images/Mask1Group-2.jpg" alt="одно из ваших фото в галерее">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Домбай</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>
-                <article class="element">
-                    <img class="element__image" src="./images/Mask1Group.jpg" alt="одно из ваших фото в галерее. очень красиво!">
-                    <div class="element__caption-area">
-                        <h2 class="element__caption">Невероятно длинное название карточки</h2>
-                        <button class="element__like-button button" type="button"></button>
-                    </div>
-                </article>-->
-                
+            <section class="elements">                
             </section>
 
         </main>
@@ -92,16 +49,17 @@
 
         <!--идеи для занимательного рефакторинга: переписать к чертям собачьим классы инпутом, а то бардак-->
         <!--поп-ап данных автора страницы-->
+        
 
         <div class="popup" id="formPopup">
-            <div class="popup-name-edit">
-                <button class="popup-name-edit__close-button button" type="button" id="closePopupButton"></button>
-                <div class="popup-name-edit__container">
-                    <h2 class="popup-name-edit__header">Редактировать профиль</h2>
+            <div class="popup__window popup-name-edit">
+                <button class="popup__close-button button" type="button" id="closeNamePopupButton"></button>
+                <div class="popup__container popup-name-edit__container">
+                    <h2 class="popup__header popup-name-edit__header">Редактировать профиль</h2>
                     <form class="popup-name-edit__form" name="form" method="post" id="nameForm">
                         <input class="input" type="text" placeholder="Имя" name="name" id="inputName">
                         <input class="input" type="text" placeholder="О себе" name="status" id="inputStatus">
-                        <button class="popup-name-edit__save-button button" type="submit" id="submitButton">Сохранить
+                        <button class="popup__submit-button popup-name-edit__submit-button button" type="submit" id="submitButton">Сохранить
                         </button> <!--эх-->
                     </form>
                 </div>
@@ -112,21 +70,31 @@
         <!--проблема нейминга - придумать что-нибудь для popup-name-blah-blah, универсальное-->
 
         <div class="popup" id="formPopupCard">
-            <div class="popup-name-edit">
-                <button class="popup-name-edit__close-button button" type="button" id="closeAddPopupButton"></button>
-                <div class="popup-name-edit__container">
-                    <h2 class="popup-name-edit__header">Новое место</h2>
-                    <form class="popup-name-edit__form" name="form" method="post" id="formAddPic">
+            <div class="popup__window popup-add">
+                <button class="popup__close-button button" type="button" id="closeAddPopupButton"></button>
+                <div class="popup__container popup-add__container">
+                    <h2 class="popup__header popup-add__header">Новое место</h2>
+                    <form class="popup-add__form" name="form" method="post" id="formAddPic">
                         <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName">
                         <input class="input" type="text" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink">
-                        <button class="popup-name-edit__save-button button" type="submit" id="addPicSubmitButton">Создать
+                        <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
                         </button>
                     </form>
                 </div>
             </div>
         </div>
 
-        
+        <div class="popup" id="zoomPopup">
+            <div class="zoom-element">
+                <!--ошибка дожившего до пр5 - проблема в названии крестиков-->
+                <button class="popup__close-button button" type="button" id="closeZoomPopupOverlay"></button>
+                <div class="zoom-element__container">
+                    <img class="zoom-element__picture" src="./images/portrait2.jpg">
+                    <h3 class="zoom-element__caption">хоба</h3>
+                </div>
+            </div>
+        </div>
+
         <template id="card">
             <article class="element">
                 <img class="element__image" src="./images/portrait2.jpg" alt="">
@@ -138,18 +106,6 @@
                 </div>
             </article>
         </template>
-
-            <div class="popup" id="zoomPopup">
-                <div class="zoom-element">
-                    <!--ошибка дожившего до пр5 - проблема в названии крестиков-->
-                    <button class="popup-name-edit__close-button button" type="button" id="closeZoomPopupOverlay"></button>
-                    <div class="zoom-element__container">
-                        <img class="zoom-element__picture" src="./images/portrait2.jpg">
-                        <h3 class="zoom-element__caption">хоба</h3>
-                    </div>
-                </div>
-            </div>
-
         
 
     </div>

@@ -1,4 +1,4 @@
-.popup-name-edit {
+.popup__window {
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
 }
 
 @media all and (max-width: 770px) {
-    .popup-name-edit {
+    .popup__window {
         max-width: 282px;
     }
 }

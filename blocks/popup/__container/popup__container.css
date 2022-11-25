@@ -1,4 +1,4 @@
-.popup-name-edit__container {
+.popup__container {
     max-width: 430px;
     width: 100%;
     background-color: #ffffff;
@@ -11,7 +11,7 @@
 }
 
 @media all and (max-width: 770px) {
-    .popup-name-edit__container {
+    .popup__container {
         margin-top: 16px;
     }
 }

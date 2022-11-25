@@ -1,4 +1,4 @@
-.popup-name-edit__save-button {
+.popup__submit-button {
     max-width: 358px;
     width: 100%;
     height: 50px;
@@ -17,12 +17,12 @@
     padding: 0;
 }
 
-.popup-name-edit__save-button:hover {
+.popup__submit-button-button:hover {
     opacity: .8;
 }
 
 @media all and (max-width: 770px) {
-    .popup-name-edit__save-button {
+    .popup__submit-button-button {
         margin-left: 22px;
         margin-top: 45px;
         margin-bottom: 25px;
