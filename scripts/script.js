@@ -106,8 +106,8 @@ function closeZoomPopup() {
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
 
-function placeInputs (evt) {
-  evt.preventDefault();
+function placeInputs (event) {
+  event.preventDefault();
   hName.textContent = nameInput.value;
   hStatus.textContent = statusInput.value;
   closeNameEditForm();
@@ -127,8 +127,8 @@ function deleteCard(event) {
 //добавление картинки через попап аддПик - стоило его написать однажды и потом юзать при загрузке странице тоже,
 //они друг друга почти полностью копируют. но я запуталась
 
-function addPic (evt) {
-  evt.preventDefault();
+function addPic (event) {
+  event.preventDefault();
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   cardZone.prepend(cardElement);
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
