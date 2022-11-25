@@ -6,8 +6,8 @@ const nameInput = document.getElementById('inputName');
 const statusInput = document.getElementById('inputStatus');
 const inputPicName = document.getElementById('inputPicName');
 const inputPicLink = document.getElementById('inputPicLink');
-let zoomPic = document.querySelector('.zoom-element__picture').src;
-let zoomCaption = document.querySelector('.zoom-element__caption').textContent;
+let zoomPic = document.querySelector('.zoom-element__picture');
+let zoomCaption = document.querySelector('.zoom-element__caption');
 
 //зона карточек и темлпейт
 
@@ -81,7 +81,12 @@ function openPopupCard() {
   popupCard.classList.add('popup_opened');
 }
 
-function openPopupZoom() {
+function openPopupZoom(event) {
+  event.preventDefault();
+  debugger;
+  clicky = event.currentTarget;
+  zoomCaption.textContent = clicky.parentNode.querySelector('.element__caption').textContent;
+  zoomPic.src = clicky.parentNode.querySelector('.element__image').src;
   popupZoom.classList.add('popup_opened');
 }
 
@@ -125,8 +130,6 @@ function deleteCard(event) {
 function addPic (evt) {
   evt.preventDefault();
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__caption').textContent = inputPicName.value;
-  cardElement.querySelector('.element__image').src = inputPicLink.value;
   cardZone.prepend(cardElement);
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
   cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
@@ -144,11 +147,6 @@ for (let i = 0; i < startingCards.length; i++) {
   cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
   cardZone.append(cardElement);
 
-//
-  document.querySelector('.zoom-element__caption').textContent = cardElement.querySelector('.element__caption').textContent;
-  document.querySelector('.zoom-element__picture').src = cardElement.querySelector('.element__image').src;
-//
-
   cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack);
   cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);  
@@ -160,7 +158,6 @@ openAddPopupButton.addEventListener('click', openPopupCard);
 closeZoomPopupOverlay.addEventListener('click', closeZoomPopup);
 closePopupButton.addEventListener('click', closeNameEditForm);
 closeAddPopupButton.addEventListener('click', closeAddPicForm);
-
 
 //изменение контента в кардЗоне
 
