@@ -1,46 +1,53 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
+//p.s. если что, я своих кошек подкормышей зову по цветам и количеству шрамов. с неймингом беда
+
 //инпуты
 
-const formName = document.getElementById('formName');
-const nameInput = document.getElementById('inputName');
-const statusInput = document.getElementById('inputStatus');
-const inputPicName = document.getElementById('inputPicName');
-const inputPicLink = document.getElementById('inputPicLink');
+const profileForm = document.querySelector('#profileForm');
+const addPicForm = document.querySelector('#addPicForm');
+const nameInput = document.querySelector('#inputName');
+const statusInput = document.querySelector('#inputStatus');
+const picNameInput = document.querySelector('#inputPicName');
+const picLinkInput = document.querySelector('#inputPicLink');
+
+//1.1 перезаписываются в открытии поп-апа \/
+
 let zoomPic = document.querySelector('.zoom-element__picture');
 let zoomCaption = document.querySelector('.zoom-element__caption');
 
 //зона карточек и темлпейт
 
-const cardTemplate = document.getElementById('card').content; 
-const cardZone = document.querySelector('.elements');
+const cardTemplate = document.querySelector('#card').content;
+const cardsZone = document.querySelector('.elements');
 
 //кнопки
 
-const openNamePopupButton = document.getElementById('openNamePopupButton');
-const openAddPopupButton = document.getElementById('openAddPopupButton');
-const closeNameButton = document.getElementById('closeNamePopupButton');
-const closeAddButton = document.getElementById('closeAddPopupButton');
-const closeZoomButton = document.getElementById('closeZoomPopupOverlay');
+const openNamePopupButton = document.querySelector('#openNamePopupButton');
+const openAddPopupButton = document.querySelector('#openAddPopupButton');
+const closeNameButton = document.querySelector('#closeNamePopupButton');
+const closeAddButton = document.querySelector('#closeAddPopupButton');
+const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 
 //поп-кошка
+//1.1 поняла тип объявления
 
-let popup = document.querySelectorAll('.popup');
-let popupName = document.getElementById('formPopup');
-let popupAdd = document.getElementById('formPopupCard');
-let popupZoom = document.getElementById('zoomPopup');
+const popups = document.querySelectorAll('.popup');
+const popupName = document.querySelector('#formPopup');
+const popupAdd = document.querySelector('#formPopupCard');
+const popupZoom = document.querySelector('#zoomPopup');
 
 //заголовки со статусом/именем
 
-const hName = document.getElementById('hName');
-const hStatus = document.getElementById('hStatus');
+const userName = document.querySelector('#userName');
+const userStatus = document.querySelector('#userStatus');
 
 //ОТКРЫТЬ ВОРОТА!
 //идея для рефакторинга этого куска к. - слить формы воедино
 
 function openNameEditForm() {
   popupName.classList.add('popup_opened');
-  nameInput.value = hName.textContent;
-  statusInput.value = hStatus.textContent;
+  nameInput.value = userName.textContent;
+  statusInput.value = userStatus.textContent;
 }
 
 function openPopupCard() {
@@ -49,34 +56,29 @@ function openPopupCard() {
 
 function openPopupZoom(event) {
   event.preventDefault();
-  clicky = event.currentTarget;
+  let clicky = event.currentTarget;
   zoomCaption.textContent = clicky.parentNode.querySelector('.element__caption').textContent;
   zoomPic.src = clicky.parentNode.querySelector('.element__image').src;
+  zoomPic.alt = clicky.parentNode.querySelector('.element__caption').textContent;
   popupZoom.classList.add('popup_opened');
 }
 
 //ЗАКРЫТЬ ВОРОТА!
 //у меня были проблемы с единой кнопкой для всего :(
 
-function closeNamePopup() {
-  popupName.classList.remove('popup_opened');
-}
+//ура, я смогла! forEach всё же стоило вставить в функцию, а не в слушатель. немного горжусь собой, это заняло время
 
-function closeAddPopup() {
-  popupAdd.classList.remove('popup_opened');
-}
-
-function closeZoomPopup() {
-  popupZoom.classList.remove('popup_opened');
+function closePopup() {
+  popups.forEach(item => {item.classList.remove('popup_opened')});
 }
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
 
 function formEditSubmitHandler (event) {
   event.preventDefault();
-  hName.textContent = nameInput.value;
-  hStatus.textContent = statusInput.value;
-  closeName();
+  userName.textContent = nameInput.value;
+  userStatus.textContent = statusInput.value;
+  closePopup();
 }
 //нужно перестать работать мемами и давать нормальные название. это лайк
 
@@ -93,46 +95,50 @@ function deleteCard(event) {
 //добавление картинки через попап аддПик - стоило его написать однажды и потом юзать при загрузке странице тоже,
 //они друг друга почти полностью копируют. но я запуталась
 
-function addPic (evt) {
-  evt.preventDefault();
+function createCard (name, pic) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__image').src = inputPicLink.value;
-  cardElement.querySelector('.element__caption').textContent = inputPicName.value;
-  cardElement.querySelector('.element__image').alt = inputPicName.value;
-  cardZone.prepend(cardElement);
+  cardElement.querySelector('.element__image').src = pic;
+  cardElement.querySelector('.element__caption').textContent = name;
+  cardElement.querySelector('.element__image').alt = name;
   cardElement.querySelector('.element__like-button').addEventListener('click', clickLikeButton); 
   cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
-  closeAdd();
+  return cardElement;
 }
+
+function createCustomCard (event) {
+  event.preventDefault();
+  const name = picNameInput.value;
+  const pic = picLinkInput.value;
+  const renderedCard = createCard(name, pic);
+  cardsZone.prepend(renderedCard);
+  closePopup();
+}
+
+//тестовые карточки я пока решила оставить в цикле, чтобы не пропустить дедлайны грядущего спринта. но я перепишу!
+
+for (let i = 0; i < startingCards.length; i++) {
+  const pic = startingCards[i].link;
+  const name = startingCards[i].name;
+  const renderedCard = createCard(name, pic);
+  cardsZone.append(renderedCard);
+} 
 
 //копирование темплейта, наполнение контентом, вставка, 6 раз, костыль - накрутка кнопок внутри цикла. брух.
 //known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
 
-for (let i = 0; i < startingCards.length; i++) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__image').src = startingCards[i].link;
-  cardElement.querySelector('.element__image').alt = startingCards[i].name;
-  cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
-  cardZone.append(cardElement);
-  cardElement.querySelector('.element__like-button').addEventListener('click', clickLikeButton);
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom); 
-} 
-
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', openPopupCard);
-closeNameButton.addEventListener('click', closeNamePopup);
-closeAddButton.addEventListener('click', closeAddPopup);
-closeZoomButton.addEventListener('click', closeZoomPopup);
+closeNameButton.addEventListener('click', closePopup);
+closeAddButton.addEventListener('click', closePopup);
+closeZoomButton.addEventListener('click', closePopup);
 
-//изменение контента в кардЗоне
+//к следующему спринту соберу всё в кулак и последую совету доработать forEach в листенере, спасибо!
 
-formAddPic.addEventListener('submit', addPic);
-nameForm.addEventListener('submit', formEditSubmitHandler);
+//изменение контента в кардсЗоне
 
-//вот что не работало. по задумке я брала массив всех .popup, брала item в функции и на него вышала remove,
-//потом функция в "слушателе" кидалсь на всё. но я не учла, что у индивидуальных функций это тоже было. i'm puzzled
+addPicForm.addEventListener('submit', createCustomCard);
+profileForm.addEventListener('submit', formEditSubmitHandler);
 
 //closePopupButtons.forEach(item => {
 //  console.log(item);
