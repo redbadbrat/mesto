@@ -4,6 +4,7 @@
     border-top-right-radius: 10px;
     width: 282px;
     height: 282px;
+    background-color: #000;
 }
 
 /*баг - изображение сжимается до состояния мокрой тряпки, не помню, что делать с этим

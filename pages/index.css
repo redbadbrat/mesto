@@ -8,8 +8,6 @@
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/elements/elements.css);
 @import url(../blocks/footer/footer.css);
-@import url(../blocks/popup-name-edit/popup-name-edit.css);
-@import url(../blocks/popup-add/popup-add.css);
 /*универсальные блоки - повторяющиеся*/
 @import url(../blocks/button/button.css);
 @import url(../blocks/element/element.css);
@@ -43,5 +41,6 @@
 @import url(../blocks/zoom-element/__container/zoom-element__container.css);
 /*модификаторы состояний*/
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/_dark/popup_dark.css);
 @import url(../blocks/element/__like-button/_clicked/element__like-button_clicked.css);
 /*а тут ничего нет и живут львы*/

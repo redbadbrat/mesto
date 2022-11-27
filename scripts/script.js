@@ -1,39 +1,5 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
 //инпуты
-debugger;
-
-const startingCards = [
-    {
-      name: 'Архыз',
-      link: './images/samples/arkhyz.jpg',
-      alt: 'барашки на фоне летних гор'
-    },
-    {
-      name: 'Озеро Байкал',
-      link: './images/samples/baikal.jpg',
-      alt: 'замёрзшее озеро Байкал'
-    },
-    {
-      name: 'Эльбрус',
-      link: './images/samples/elbrus.jpg',
-      alt: 'деревня на фоне горы Эльбрус'
-    },
-    {
-      name: 'Карелия',
-      link: './images/samples/karelia.jpg',
-      alt: 'палатка в лесу и поле морошки'
-    },
-    {
-      name: 'Сахалин',
-      link: './images/samples/sakhalyn.jpg',
-      alt: 'столб пепла после извержения вулкана'
-    },
-    {
-      name: 'Териберка, Мурманская область',
-      link: './images/samples/teriberka.jpg',
-      alt: 'рыбаки в лодках на фоне северного сияния'
-    }
-  ]; 
 
 const formName = document.getElementById('formName');
 const nameInput = document.getElementById('inputName');
@@ -92,21 +58,21 @@ function openPopupZoom(event) {
 //ЗАКРЫТЬ ВОРОТА!
 //у меня были проблемы с единой кнопкой для всего :(
 
-function closeName() {
+function closeNamePopup() {
   popupName.classList.remove('popup_opened');
 }
 
-function closeAdd() {
+function closeAddPopup() {
   popupAdd.classList.remove('popup_opened');
 }
 
-function closeZoom() {
+function closeZoomPopup() {
   popupZoom.classList.remove('popup_opened');
 }
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
 
-function placeInputs (event) {
+function formEditSubmitHandler (event) {
   event.preventDefault();
   hName.textContent = nameInput.value;
   hStatus.textContent = statusInput.value;
@@ -114,7 +80,7 @@ function placeInputs (event) {
 }
 //нужно перестать работать мемами и давать нормальные название. это лайк
 
-function paintItBlack (event) {
+function clickLikeButton (event) {
   event.target.classList.toggle('element__like-button_clicked');
 }
 
@@ -128,14 +94,13 @@ function deleteCard(event) {
 //они друг друга почти полностью копируют. но я запуталась
 
 function addPic (evt) {
-  debugger;
   evt.preventDefault();
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   cardElement.querySelector('.element__image').src = inputPicLink.value;
   cardElement.querySelector('.element__caption').textContent = inputPicName.value;
-  cardElement.querySelector('.element__caption').alt = inputPicName.value;
+  cardElement.querySelector('.element__image').alt = inputPicName.value;
   cardZone.prepend(cardElement);
-  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack); 
+  cardElement.querySelector('.element__like-button').addEventListener('click', clickLikeButton); 
   cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
   closeAdd();
@@ -147,24 +112,24 @@ function addPic (evt) {
 for (let i = 0; i < startingCards.length; i++) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
   cardElement.querySelector('.element__image').src = startingCards[i].link;
-  cardElement.querySelector('.element__image').alt = startingCards[i].alt;
+  cardElement.querySelector('.element__image').alt = startingCards[i].name;
   cardElement.querySelector('.element__caption').textContent = startingCards[i].name;
   cardZone.append(cardElement);
-  cardElement.querySelector('.element__like-button').addEventListener('click', paintItBlack);
+  cardElement.querySelector('.element__like-button').addEventListener('click', clickLikeButton);
   cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
   cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom); 
 } 
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', openPopupCard);
-closeNameButton.addEventListener('click', closeName);
-closeAddButton.addEventListener('click', closeAdd);
-closeZoomButton.addEventListener('click', closeZoom);
+closeNameButton.addEventListener('click', closeNamePopup);
+closeAddButton.addEventListener('click', closeAddPopup);
+closeZoomButton.addEventListener('click', closeZoomPopup);
 
 //изменение контента в кардЗоне
 
 formAddPic.addEventListener('submit', addPic);
-nameForm.addEventListener('submit', placeInputs);
+nameForm.addEventListener('submit', formEditSubmitHandler);
 
 //вот что не работало. по задумке я брала массив всех .popup, брала item в функции и на него вышала remove,
 //потом функция в "слушателе" кидалсь на всё. но я не учла, что у индивидуальных функций это тоже было. i'm puzzled
