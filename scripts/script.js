@@ -12,8 +12,8 @@ const picLinkInput = document.querySelector('#inputPicLink');
 
 //1.1 перезаписываются в открытии поп-апа \/
 
-let zoomPic = document.querySelector('.zoom-element__picture');
-let zoomCaption = document.querySelector('.zoom-element__caption');
+const zoomPic = document.querySelector('.zoom-element__picture');
+const zoomCaption = document.querySelector('.zoom-element__caption');
 
 //зона карточек и темлпейт
 
@@ -24,7 +24,7 @@ const cardsZone = document.querySelector('.elements');
 
 const openNamePopupButton = document.querySelector('#openNamePopupButton');
 const openAddPopupButton = document.querySelector('#openAddPopupButton');
-const closeNameButton = document.querySelector('#closeNamePopupButton');
+const closeProfileButton = document.querySelector('#closeNamePopupButton');
 const closeAddButton = document.querySelector('#closeAddPopupButton');
 const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 
@@ -32,7 +32,7 @@ const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 //1.1 поняла тип объявления
 
 const popups = document.querySelectorAll('.popup');
-const popupName = document.querySelector('#formPopup');
+const popupProfile = document.querySelector('#formPopup');
 const popupAdd = document.querySelector('#formPopupCard');
 const popupZoom = document.querySelector('#zoomPopup');
 
@@ -44,23 +44,26 @@ const userStatus = document.querySelector('#userStatus');
 //ОТКРЫТЬ ВОРОТА!
 //идея для рефакторинга этого куска к. - слить формы воедино
 
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+}
+
 function openNameEditForm() {
-  popupName.classList.add('popup_opened');
+  openPopup(popupProfile);
   nameInput.value = userName.textContent;
   statusInput.value = userStatus.textContent;
 }
 
-function openPopupCard() {
-  popupAdd.classList.add('popup_opened');
-}
-
 function openPopupZoom(event) {
+  debugger;
+  console.log(event.target);
   event.preventDefault();
-  let clicky = event.currentTarget;
-  zoomCaption.textContent = clicky.parentNode.querySelector('.element__caption').textContent;
-  zoomPic.src = clicky.parentNode.querySelector('.element__image').src;
-  zoomPic.alt = clicky.parentNode.querySelector('.element__caption').textContent;
-  popupZoom.classList.add('popup_opened');
+  //let clicky = event.target;
+  zoomCaption.textContent = event.target.closest('.element__caption').textContent;
+  zoomPic.src = event.target.closest('.element__image').src;
+  zoomPic.alt = event.target.closest('.element__image').alt;
+  popupZoom.classList.add('popup_dark');
+  openPopup(popupZoom);
 }
 
 //ЗАКРЫТЬ ВОРОТА!
@@ -68,8 +71,8 @@ function openPopupZoom(event) {
 
 //ура, я смогла! forEach всё же стоило вставить в функцию, а не в слушатель. немного горжусь собой, это заняло время
 
-function closePopup() {
-  popups.forEach(item => {item.classList.remove('popup_opened')});
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
 }
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
@@ -78,7 +81,7 @@ function formEditSubmitHandler (event) {
   event.preventDefault();
   userName.textContent = nameInput.value;
   userStatus.textContent = statusInput.value;
-  closePopup();
+  closePopup(popupProfile);
 }
 //нужно перестать работать мемами и давать нормальные название. это лайк
 
@@ -112,7 +115,7 @@ function createCustomCard (event) {
   const pic = picLinkInput.value;
   const renderedCard = createCard(name, pic);
   cardsZone.prepend(renderedCard);
-  closePopup();
+  closePopup(popupAdd);
 }
 
 //тестовые карточки я пока решила оставить в цикле, чтобы не пропустить дедлайны грядущего спринта. но я перепишу!
@@ -128,10 +131,10 @@ for (let i = 0; i < startingCards.length; i++) {
 //known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
-openAddPopupButton.addEventListener('click', openPopupCard);
-closeNameButton.addEventListener('click', closePopup);
-closeAddButton.addEventListener('click', closePopup);
-closeZoomButton.addEventListener('click', closePopup);
+openAddPopupButton.addEventListener('click', () => openPopup(popupAdd));
+closeProfileButton.addEventListener('click', () => closePopup(popupProfile));
+closeAddButton.addEventListener('click', () => closePopup(popupAdd));
+closeZoomButton.addEventListener('click', () => closePopup(popupZoom));
 
 //к следующему спринту соберу всё в кулак и последую совету доработать forEach в листенере, спасибо!
 
