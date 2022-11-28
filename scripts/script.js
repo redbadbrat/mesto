@@ -58,9 +58,10 @@ function openPopupZoom(event) {
   debugger;
   console.log(event.target);
   event.preventDefault();
-  zoomCaption.textContent = event.target.closest('.element').querySelector('.element__caption').textContent;
-  zoomPic.src = event.target.closest('.element').querySelector('.element__image').src;
-  zoomPic.alt = event.target.closest('.element').querySelector('.element__image').alt;
+  const clicky = event.target.closest('.element');
+  zoomCaption.textContent = clicky.querySelector('.element__caption').textContent;
+  zoomPic.src = clicky.querySelector('.element__image').src;
+  zoomPic.alt = clicky.querySelector('.element__image').alt;
   popupZoom.classList.add('popup_dark');
   openPopup(popupZoom);
 }
