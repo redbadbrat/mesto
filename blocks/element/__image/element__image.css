@@ -1,10 +1,12 @@
 .element__image {
+    display: block;
     margin: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     width: 282px;
     height: 282px;
     background-color: #000;
+    color: #fff;
 }
 
 /*баг - изображение сжимается до состояния мокрой тряпки, не помню, что делать с этим
