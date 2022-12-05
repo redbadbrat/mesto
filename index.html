@@ -9,6 +9,8 @@
     <meta name="author" content="Ксения Тельманова">
     <link rel="stylesheet" href="./pages/index.css">
     <script src="./scripts/sample-cards.js" defer></script>
+    <script src="./scripts/variables.js" defer></script>
+    <script src="./scripts/validation.js" defer></script>
     <script src="./scripts/script.js" defer></script>
 </head>
 
@@ -59,8 +61,8 @@
                 <div class="popup__container popup-name-edit__container">
                     <h2 class="popup__header popup-name-edit__header">Редактировать профиль</h2>
                     <form class="popup-name-edit__form" name="form" method="post" id="profileForm">
-                        <input class="input" type="text" placeholder="Имя" name="name" id="inputName">
-                        <input class="input" type="text" placeholder="О себе" name="status" id="inputStatus">
+                        <input class="input" type="text" placeholder="Имя" name="name" id="inputName" minlength="2" maxlength="40" required novalidate>
+                        <input class="input" type="text" placeholder="О себе" name="status" id="inputStatus" minlength="2" maxlength="200" required novalidate>
                         <button class="popup__submit-button popup-name-edit__submit-button button" type="submit" id="submitButton">Сохранить
                         </button> <!--эх-->
                     </form>
@@ -77,8 +79,8 @@
                 <div class="popup__container popup-add__container">
                     <h2 class="popup__header popup-add__header">Новое место</h2>
                     <form class="popup-add__form" name="form" method="post" id="addPicForm">
-                        <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName">
-                        <input class="input" type="url" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink">
+                        <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName" minlength="2" maxlength="30" required novalidate>
+                        <input class="input" type="url" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink" required novalidate>
                         <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
                         </button>
                     </form>

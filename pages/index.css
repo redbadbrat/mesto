@@ -43,4 +43,5 @@
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_dark/popup_dark.css);
 @import url(../blocks/element/__like-button/_clicked/element__like-button_clicked.css);
+@import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
 /*а тут ничего нет и живут львы*/
