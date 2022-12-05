@@ -36,6 +36,7 @@
 @import url(../blocks/popup/__header/popup__header.css);
 @import url(../blocks/popup/__submit-button/popup__submit-button.css);
 @import url(../blocks/popup/__window/popup__window.css);
+@import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/zoom-element/__caption/zoom-element__caption.css);
 @import url(../blocks/zoom-element/__picture/zoom-element__picture.css);
 @import url(../blocks/zoom-element/__container/zoom-element__container.css);
@@ -44,4 +45,5 @@
 @import url(../blocks/popup/_dark/popup_dark.css);
 @import url(../blocks/element/__like-button/_clicked/element__like-button_clicked.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
+@import url(../blocks/input/_if-has-error/input_if-has-error.css);
 /*а тут ничего нет и живут львы*/

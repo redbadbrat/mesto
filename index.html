@@ -51,36 +51,33 @@
             <p class="footer__copyright">&copy; 2022 Testo Russia + MidJourney = &#10084;</p>
         </footer>
 
-        <!--идеи для занимательного рефакторинга: переписать к чертям собачьим классы инпутом, а то бардак-->
         <!--поп-ап данных автора страницы-->
         
-
         <div class="popup" id="formPopup">
             <div class="popup__window popup-name-edit">
                 <button class="popup__close-button button" type="button" id="closeNamePopupButton"></button>
                 <div class="popup__container popup-name-edit__container">
                     <h2 class="popup__header popup-name-edit__header">Редактировать профиль</h2>
-                    <form class="popup-name-edit__form" name="form" method="post" id="profileForm">
-                        <input class="input" type="text" placeholder="Имя" name="name" id="inputName" minlength="2" maxlength="40" required novalidate>
-                        <input class="input" type="text" placeholder="О себе" name="status" id="inputStatus" minlength="2" maxlength="200" required novalidate>
+                    <form class="popup-name-edit__form form" name="form" method="post" id="profileForm">
+                        <input class="input input_if-has-error" type="text" placeholder="Имя" name="name" id="inputName" minlength="2" maxlength="40" required novalidate>
+                        <input class="input input_if-has-error" type="text" placeholder="О себе" name="status" id="inputStatus" minlength="2" maxlength="200" required novalidate>
                         <button class="popup__submit-button popup-name-edit__submit-button button" type="submit" id="submitButton">Сохранить
-                        </button> <!--эх-->
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
 
         <!--поп-ап добавления картинки-->
-        <!--проблема нейминга - придумать что-нибудь для popup-name-blah-blah, универсальное-->
 
         <div class="popup" id="formPopupCard">
             <div class="popup__window popup-add">
                 <button class="popup__close-button button" type="button" id="closeAddPopupButton"></button>
                 <div class="popup__container popup-add__container">
                     <h2 class="popup__header popup-add__header">Новое место</h2>
-                    <form class="popup-add__form" name="form" method="post" id="addPicForm">
-                        <input class="input" type="text" placeholder="Название" name="picName" id="inputPicName" minlength="2" maxlength="30" required novalidate>
-                        <input class="input" type="url" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink" required novalidate>
+                    <form class="popup-add__form form" name="form" method="post" id="addPicForm">
+                        <input class="input input_if-has-error" type="text" placeholder="Название" name="picName" id="inputPicName" minlength="2" maxlength="30" required novalidate>
+                        <input class="input input_if-has-error" type="url" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink" required novalidate>
                         <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
                         </button>
                     </form>
@@ -90,7 +87,6 @@
 
         <div class="popup" id="zoomPopup">
             <div class="zoom-element">
-                <!--ошибка дожившего до пр5 - проблема в названии крестиков-->
                 <button class="popup__close-button button" type="button" id="closeZoomPopupOverlay"></button>
                 <div class="zoom-element__container">
                     <img class="zoom-element__picture" src="#">
