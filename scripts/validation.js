@@ -1,23 +1,25 @@
-const validationSettings = {
+//в ТЗ было много селекторов, но не все были использованы, хотя всё работает.
+
+const settings = {
   inputSelector: '.input',
   formSelector: '.form',
   buttonSelector: '.popup__submit-button',
-  inputErrorSelector: 'input__error'
+  inputErrorSelector: 'input_style_error',
+  inputSpanErrorActive: 'input__error_active',
+  buttonDisabled: 'popup__submit-button_disabled'
 }
-
-const forms = Array.from(document.querySelectorAll(validationSettings.formSelector));
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('input_style_error');
+  inputElement.classList.add(settings.inputErrorSelector);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('input__error_active');
+  errorElement.classList.add(settings.inputSpanErrorActive);
 };
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('input_style_error');
-  errorElement.classList.remove('input__error_active');
+  inputElement.classList.remove(settings.inputErrorSelector);
+  errorElement.classList.remove(settings.inputSpanErrorActive);
   errorElement.textContent = '';
 };
 
@@ -29,8 +31,6 @@ const checkInputValidity = (formElement, inputElement) => {
   }
 };
 
-//к сожалению, функцию из тренажёра я не совсем приняла как родную, переписала отдельно оба этапа - попроще
-
 function hasInvalidInput(inputList) {
   return inputList.some((inputElement) => {
   return !inputElement.validity.valid;
@@ -39,17 +39,17 @@ function hasInvalidInput(inputList) {
 
 function toggleSubmitButton(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
-  buttonElement.classList.add('popup__submit-button_disabled');
+  buttonElement.classList.add(settings.buttonDisabled);
   buttonElement.disabled = true;
 } else {
-  buttonElement.classList.remove('popup__submit-button_disabled');
+  buttonElement.classList.remove(settings.buttonDisabled);
   buttonElement.disabled = false;
 } 
 }
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.input'));
-  const buttonElement = formElement.querySelector('.popup__submit-button');
+  const buttonElement = formElement.querySelector(settings.buttonSelector);
   toggleSubmitButton(inputList, buttonElement);
 
   inputList.forEach((inputElement) => {
@@ -61,7 +61,7 @@ const setEventListeners = (formElement) => {
 };
 
 function enableValidation() {
-  formList = forms; 
+  formList = Array.from(document.querySelectorAll(settings.formSelector)); 
   formList.forEach((formElement) => {
   formElement.addEventListener('submit', (evt) => {
     evt.preventDefault();
@@ -70,4 +70,9 @@ function enableValidation() {
 }); 
 }
 
-enableValidation();
+enableValidation(settings);
+
+//отдельную благодарность выражаю старшим студентам нашей когорты (и младшим студентам тоже!), которые объяснили 
+//мне принцип замыкания и то, как он используется. упоминайся он в тренажёре термином, было бы проще. без понимания этого принципа
+//оставалось бы просто скопировать тренажёр, вставить, закрыть глаза и тыкать переменные до тех пор, пока не заработает.
+//боль.

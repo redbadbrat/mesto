@@ -2,7 +2,9 @@
 
 //все переменные репатриировались в variables.js
 
-//ОТКРЫТЬ ВОРОТА!
+//ОТКРЫТЬ ВОРОТА! - теперь с крутым ловцом ивентов!
+
+//внутрь передаётся type - он отражает потребность в неактивной кнопке в попапе. если что, я могу просто давать false/true, но с примитивом код читается легче
 
 function openPopup(popup, type) {
   if (type === true) {
@@ -11,6 +13,7 @@ function openPopup(popup, type) {
     submitButton.classList.add('popup__submit-button_disabled');
   }
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
 }
 
 function openNameEditForm() {
@@ -31,10 +34,29 @@ function openPopupZoom(event) {
   openPopup(popupZoom, noInput);
 }
 
-//ЗАКРЫТЬ ВОРОТА!
+//ЗАКРЫТЬ ВОРОТА! - теперь с крутым ловцом ивентов!
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+}
+
+//версия 1 для кнопки еск - была на корню раскритикована коллегами по когорте. я всё равно питаю к ней нежные чувства
+
+/*function closePopupEsc(popup, event) {
+  if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === "27") {
+    closePopup(popup);
+  }
+}*/
+
+//версия 2 - прилизанная 
+
+function closePopupEsc(event) {
+  if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === "27") {
+    closePopup(
+      document.querySelector('.popup_opened')
+    )
+  }
 }
 
 //ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
@@ -73,6 +95,8 @@ function createCustomCard (event) {
   const pic = picLinkInput.value;
   const renderedCard = createCard(name, pic);
   cardsZone.prepend(renderedCard);
+  picNameInput.value = '';
+  picLinkInput.value = '';
   closePopup(popupAdd);
 }
 
@@ -94,16 +118,20 @@ closeProfileButton.addEventListener('click', () => closePopup(popupProfile));
 closeAddButton.addEventListener('click', () => closePopup(popupAdd));
 closeZoomButton.addEventListener('click', () => closePopup(popupZoom));
 
-//к следующему спринту соберу всё в кулак и последую совету доработать forEach в листенере, спасибо!
+//known bug - не давало вводить формы и закрывало по клику в любом месте
+//апдейт: пофиксила.
+//оверлейное
+
+popups.forEach(element => { 
+  element.addEventListener('click', (event) => {
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(element)}
+  });
+});
 
 //изменение контента в кардсЗоне
 
 addPicForm.addEventListener('submit', createCustomCard);
 profileForm.addEventListener('submit', formEditSubmitHandler);
-
-//closePopupButtons.forEach(item => {
-//  console.log(item);
-//  item.addEventListener('click', closePopup);
-//});
 
 //а в школьные годы с++ для начинающих давался мне легче. старею.

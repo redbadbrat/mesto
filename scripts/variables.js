@@ -32,6 +32,7 @@ const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 //поп-кошка
 
 const popups = document.querySelectorAll('.popup');
+const popupWindows = document.querySelectorAll('.popup__window');
 const popupProfile = document.querySelector('#formPopup');
 const popupAdd = document.querySelector('#formPopupCard');
 const popupZoom = document.querySelector('#zoomPopup');
