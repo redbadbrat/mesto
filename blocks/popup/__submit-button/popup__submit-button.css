@@ -2,8 +2,7 @@
     max-width: 358px;
     width: 100%;
     height: 50px;
-    margin-left: 36px;
-    margin-top: 48px;
+    margin-top: 18px;
     margin-bottom: 37px;
     background-color: #000000;
     border: none;
@@ -23,7 +22,6 @@
 
 @media all and (max-width: 770px) {
     .popup__submit-button {
-        margin-left: 22px;
         margin-top: 45px;
         margin-bottom: 25px;
         font-size: 14px;

@@ -1,16 +1,20 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
-//p.s. если что, я своих кошек подкормышей зову по цветам и количеству шрамов. с неймингом беда
 
 //все переменные репатриировались в variables.js
 
 //ОТКРЫТЬ ВОРОТА!
 
-function openPopup(popup) {
+function openPopup(popup, type) {
+  if (type === true) {
+    submitButton = popup.querySelector('.popup__submit-button');
+    submitButton.disabled = true;
+    submitButton.classList.add('popup__submit-button_disabled');
+  }
   popup.classList.add('popup_opened');
 }
 
 function openNameEditForm() {
-  openPopup(popupProfile);
+  openPopup(popupProfile, hasInput);
   nameInput.value = userName.textContent;
   statusInput.value = userStatus.textContent;
 }
@@ -24,13 +28,10 @@ function openPopupZoom(event) {
   zoomPic.src = clicky.querySelector('.element__image').src;
   zoomPic.alt = clicky.querySelector('.element__image').alt;
   popupZoom.classList.add('popup_dark');
-  openPopup(popupZoom);
+  openPopup(popupZoom, noInput);
 }
 
 //ЗАКРЫТЬ ВОРОТА!
-//у меня были проблемы с единой кнопкой для всего :(
-
-//ура, я смогла! forEach всё же стоило вставить в функцию, а не в слушатель. немного горжусь собой, это заняло время
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
@@ -44,7 +45,6 @@ function formEditSubmitHandler (event) {
   userStatus.textContent = statusInput.value;
   closePopup(popupProfile);
 }
-//нужно перестать работать мемами и давать нормальные название. это лайк
 
 function clickLikeButton (event) {
   event.target.classList.toggle('element__like-button_clicked');
@@ -55,9 +55,6 @@ function clickLikeButton (event) {
 function deleteCard(event) {
   event.target.closest('.element').remove();
 }
-
-//добавление картинки через попап аддПик - стоило его написать однажды и потом юзать при загрузке странице тоже,
-//они друг друга почти полностью копируют. но я запуталась
 
 function createCard (name, pic) {
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
@@ -92,7 +89,7 @@ for (let i = 0; i < startingCards.length; i++) {
 //known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
-openAddPopupButton.addEventListener('click', () => openPopup(popupAdd));
+openAddPopupButton.addEventListener('click', () => openPopup(popupAdd, hasInput));
 closeProfileButton.addEventListener('click', () => closePopup(popupProfile));
 closeAddButton.addEventListener('click', () => closePopup(popupAdd));
 closeZoomButton.addEventListener('click', () => closePopup(popupZoom));

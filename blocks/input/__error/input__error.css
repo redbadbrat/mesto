@@ -1,0 +1,6 @@
+.input__error {
+    display: block;
+    text-overflow: clip;
+    min-height: 30px;
+    padding-top: 5px;
+}

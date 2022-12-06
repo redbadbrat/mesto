@@ -5,3 +5,7 @@
     color: #000000;
     background-color: #ffffff;
 }
+
+.popup__submit-button_disabled:hover {
+    opacity: .2;
+}

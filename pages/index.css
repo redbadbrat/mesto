@@ -14,6 +14,7 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/input/input.css);
 @import url(../blocks/zoom-element/zoom-element.css);
+@import url(../blocks/fieldset/fieldset.css);
 /*элементы*/
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/profile/__name-area/profile__name-area.css);
@@ -40,10 +41,12 @@
 @import url(../blocks/zoom-element/__caption/zoom-element__caption.css);
 @import url(../blocks/zoom-element/__picture/zoom-element__picture.css);
 @import url(../blocks/zoom-element/__container/zoom-element__container.css);
+@import url(../blocks/input/__error/input__error.css);
 /*модификаторы состояний*/
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/_dark/popup_dark.css);
 @import url(../blocks/element/__like-button/_clicked/element__like-button_clicked.css);
 @import url(../blocks/popup/__submit-button/_disabled/popup__submit-button_disabled.css);
-@import url(../blocks/input/_if-has-error/input_if-has-error.css);
+@import url(../blocks/input/__error/_active/input__error_active.css);
+@import url(../blocks/input/_style/input_style_error.css);
 /*а тут ничего нет и живут львы*/

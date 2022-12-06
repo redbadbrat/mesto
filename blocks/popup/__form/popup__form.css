@@ -1,3 +1,10 @@
-.popup__form:invalid {
-    border-bottom: #FF0000 solid 1px; 
+.popup__form {
+    padding-left: 36px;
+
 }
+
+@media all and (max-width: 770px) {
+    .popup__form {
+        padding-left: 22px;
+    }
+};

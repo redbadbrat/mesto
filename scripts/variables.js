@@ -1,11 +1,15 @@
+//вспомогательные триггеры - является ли попап формочкой (для песка) или не принимает на вход инпутов
+const hasInput = true;
+const noInput = false;
+
 //инпуты
 
 const profileForm = document.querySelector('#profileForm');
 const addPicForm = document.querySelector('#addPicForm');
-const nameInput = document.querySelector('#inputName');
-const statusInput = document.querySelector('#inputStatus');
-const picNameInput = document.querySelector('#inputPicName');
-const picLinkInput = document.querySelector('#inputPicLink');
+const nameInput = document.querySelector('#input-name');
+const statusInput = document.querySelector('#input-status');
+const picNameInput = document.querySelector('#input-pic-name');
+const picLinkInput = document.querySelector('#input-pic-link');
 
 //зум зум
 

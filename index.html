@@ -58,11 +58,17 @@
                 <button class="popup__close-button button" type="button" id="closeNamePopupButton"></button>
                 <div class="popup__container popup-name-edit__container">
                     <h2 class="popup__header popup-name-edit__header">Редактировать профиль</h2>
-                    <form class="popup-name-edit__form form" name="form" method="post" id="profileForm">
-                        <input class="input input_if-has-error" type="text" placeholder="Имя" name="name" id="inputName" minlength="2" maxlength="40" required novalidate>
-                        <input class="input input_if-has-error" type="text" placeholder="О себе" name="status" id="inputStatus" minlength="2" maxlength="200" required novalidate>
-                        <button class="popup__submit-button popup-name-edit__submit-button button" type="submit" id="submitButton">Сохранить
-                        </button>
+                    <form class="popup-name-edit__form form popup__form" name="form" method="post" id="profileForm" novalidate>
+                        <fieldset class="popup__fieldset-profile fieldset">
+                            <input class="input" type="text" placeholder="Имя" name="name" 
+                            id="input-name" minlength="2" maxlength="40" required>
+                            <span class="input__error input-name-error"> </span>
+                            <input class="input" type="text" placeholder="О себе" name="status" 
+                            id="input-status" minlength="2" maxlength="200" required>
+                            <span class="input__error input-status-error"> </span>
+                            <button class="popup__submit-button popup-name-edit__submit-button button" type="submit" id="submitButton">Сохранить
+                            </button>
+                        </fieldset>
                     </form>
                 </div>
             </div>
@@ -75,11 +81,18 @@
                 <button class="popup__close-button button" type="button" id="closeAddPopupButton"></button>
                 <div class="popup__container popup-add__container">
                     <h2 class="popup__header popup-add__header">Новое место</h2>
-                    <form class="popup-add__form form" name="form" method="post" id="addPicForm">
-                        <input class="input input_if-has-error" type="text" placeholder="Название" name="picName" id="inputPicName" minlength="2" maxlength="30" required novalidate>
-                        <input class="input input_if-has-error" type="url" placeholder="Ссылка на картинку" name="picLink" id="inputPicLink" required novalidate>
-                        <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
-                        </button>
+                    
+                    <form class="popup-add__form form popup__form" name="form" method="post" id="addPicForm" novalidate>
+                        <fieldset class="popup__fieldset-add fieldset">
+                            <input class="input" type="text" placeholder="Название" 
+                            name="picName" id="input-pic-name" minlength="2" maxlength="30" required>
+                            <span class="input__error input-pic-name-error"> </span>
+                            <input class="input" type="url" placeholder="Ссылка на картинку" 
+                            name="picLink" id="input-pic-link" required>
+                            <span class="input__error input-pic-link-error"> </span>
+                            <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
+                            </button>
+                        </fieldset>
                     </form>
                 </div>
             </div>
