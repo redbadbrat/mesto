@@ -37,7 +37,7 @@ function hasInvalidInput(inputList) {
 }); 
 }
 
-function toggleButtonState(inputList, buttonElement) {
+function toggleSubmitButton(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
   buttonElement.classList.add('popup__submit-button_disabled');
   buttonElement.disabled = true;
@@ -49,10 +49,13 @@ function toggleButtonState(inputList, buttonElement) {
 
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll('.input'));
-  buttonElement = formElement.querySelector('.popup__submit-button');
+  const buttonElement = formElement.querySelector('.popup__submit-button');
+  toggleSubmitButton(inputList, buttonElement);
+
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
       checkInputValidity(formElement, inputElement);
+      toggleSubmitButton(inputList, buttonElement);
     });
   });
 };
