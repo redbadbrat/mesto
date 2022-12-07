@@ -1,4 +1,4 @@
-.input__error {
+.form__input-error {
     display: block;
     text-overflow: clip;
     min-height: 30px;

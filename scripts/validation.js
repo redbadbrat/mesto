@@ -5,19 +5,19 @@ const settings = {
   formSelector: '.form',
   buttonSelector: '.popup__submit-button',
   inputErrorSelector: 'input_style_error',
-  inputSpanErrorActive: 'input__error_active',
+  inputSpanErrorActive: 'form__input-error_active',
   buttonDisabled: 'popup__submit-button_disabled'
 }
 
 const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
   inputElement.classList.add(settings.inputErrorSelector);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(settings.inputSpanErrorActive);
 };
 
 const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
   inputElement.classList.remove(settings.inputErrorSelector);
   errorElement.classList.remove(settings.inputSpanErrorActive);
   errorElement.textContent = '';
