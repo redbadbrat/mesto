@@ -1,7 +1,4 @@
 //вспомогательные триггеры - является ли попап формочкой (для песка) или не принимает на вход инпутов
-const hasInput = true;
-const noInput = false;
-
 //инпуты
 
 const profileForm = document.querySelector('#profileForm');
