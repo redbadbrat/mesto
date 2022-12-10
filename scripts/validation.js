@@ -1,6 +1,6 @@
 //в ТЗ было много селекторов, но не все были использованы, хотя всё работает.
 
-const constants = {
+const validationSettings = {
   formSelector: '.form',
   buttonSelector: '.popup__submit-button',
   inputErrorSelector: 'input_style_error',
@@ -8,25 +8,25 @@ const constants = {
   buttonDisabled: 'popup__submit-button_disabled'
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
+function showInputError (formElement, inputElement, errorMessage, settings) {
   const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
-  inputElement.classList.add(constants.inputErrorSelector);
+  inputElement.classList.add(settings.inputErrorSelector);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(constants.inputSpanErrorActive);
+  errorElement.classList.add(settings.inputSpanErrorActive);
 };
 
-const hideInputError = (formElement, inputElement) => {
+function hideInputError (formElement, inputElement, settings) {
   const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
-  inputElement.classList.remove(constants.inputErrorSelector);
-  errorElement.classList.remove(constants.inputSpanErrorActive);
+  inputElement.classList.remove(settings.inputErrorSelector);
+  errorElement.classList.remove(settings.inputSpanErrorActive);
   errorElement.textContent = '';
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+function checkInputValidity(formElement, inputElement, settings) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
@@ -36,47 +36,47 @@ function hasInvalidInput(inputList) {
   }); 
 };
 
-function disableSubmitButton(buttonElement) {
-  buttonElement.classList.add(constants.buttonDisabled);
+function disableSubmitButton(buttonElement, settings) {
+  buttonElement.classList.add(settings.buttonDisabled);
   buttonElement.disabled = true;
 };
 
-function enableSubmitButton(buttonElement) {
-  buttonElement.classList.remove(constants.buttonDisabled);
+function enableSubmitButton(buttonElement, settings) {
+  buttonElement.classList.remove(settings.buttonDisabled);
   buttonElement.disabled = false;
 };
 
 //я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
 
-function toggleSubmitButton(inputList, buttonElement) {
+function toggleSubmitButton(inputList, buttonElement, settings) {
   if (hasInvalidInput(inputList)) {
-    disableSubmitButton(buttonElement);
+    disableSubmitButton(buttonElement, settings);
   } else {
-    enableSubmitButton(buttonElement);
+    enableSubmitButton(buttonElement, settings);
   } 
 };
 
-const setEventListeners = (formElement) => {
+function setEventListeners(formElement, settings) {
   const inputList = Array.from(formElement.querySelectorAll('.input'));
-  const buttonElement = formElement.querySelector(constants.buttonSelector);
-  toggleSubmitButton(inputList, buttonElement);
+  const buttonElement = formElement.querySelector(settings.buttonSelector);
+  toggleSubmitButton(inputList, buttonElement, settings);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleSubmitButton(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, settings);
+      toggleSubmitButton(inputList, buttonElement, settings);
     });
   });
 };
 
-function enableValidation(constants) {
-  formList = Array.from(document.querySelectorAll(constants.formSelector)); 
+function enableValidation(settings) {
+  formList = Array.from(document.querySelectorAll(settings.formSelector)); 
   formList.forEach((formElement) => {
-    setEventListeners(formElement);
+    setEventListeners(formElement, settings);
   }); 
 }
 
-enableValidation(constants);
+enableValidation(validationSettings);
 
 //отдельную благодарность выражаю старшим студентам нашей когорты (и младшим студентам тоже!), которые объяснили 
 //мне принцип замыкания и то, как он используется. упоминайся он в тренажёре термином, было бы проще. без понимания этого принципа

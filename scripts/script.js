@@ -12,11 +12,10 @@ function openPopup(popup) {
 }
 
 function openNameEditForm() {
-  debugger;
   openPopup(popupProfile);
   nameInput.value = userName.textContent;
   statusInput.value = userStatus.textContent;
-  disableSubmitButton(popupProfile.querySelector(constants.buttonSelector));
+  disableSubmitButton(popupProfile.querySelector(validationSettings.buttonSelector), validationSettings);
 }
 
 function openPopupZoom(event) {
@@ -109,7 +108,7 @@ startingCards.forEach(({name, link}) => {
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', function () {
-  disableSubmitButton(popupAdd.querySelector(constants.buttonSelector));
+  disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
   openPopup(popupAdd);
 });
 
