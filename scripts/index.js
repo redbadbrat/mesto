@@ -63,45 +63,6 @@ function formEditSubmitHandler (event) {
   closePopup(popupProfile);
 }
 
-function clickLikeButton (event) {
-  event.target.classList.toggle('element__like-button_clicked');
-}
-
-//удоли
-
-function deleteCard(event) {
-  event.target.closest('.element').remove();
-}
-
-function createCard (name, pic) {
-  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
-  cardElement.querySelector('.element__image').src = pic;
-  cardElement.querySelector('.element__caption').textContent = name;
-  cardElement.querySelector('.element__image').alt = name;
-  cardElement.querySelector('.element__like-button').addEventListener('click', clickLikeButton); 
-  cardElement.querySelector('.element__delete-button').addEventListener('click', deleteCard);
-  cardElement.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
-  return cardElement;
-}
-
-function createCustomCard (event) {
-  event.preventDefault();
-  const name = picNameInput.value;
-  const pic = picLinkInput.value;
-  const renderedCard = createCard(name, pic);
-  cardsZone.prepend(renderedCard);
-  picNameInput.value = '';
-  picLinkInput.value = '';
-  closePopup(popupAdd);
-}
-
-//тестовые карточки я пока решила оставить в цикле, чтобы не пропустить дедлайны грядущего спринта. но я перепишу!
-//and they buried you in heavy snow, and they beat you and they played you like a drum,
-//but you just partied like it's 1997 again. Everything Everything - хорошая группа.
-
-startingCards.forEach(({name, link}) => {
-  cardsZone.append(createCard(name, link));
-})
 
 //копирование темплейта, наполнение контентом, вставка, 6 раз, костыль - накрутка кнопок внутри цикла. брух.
 //known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
@@ -116,16 +77,22 @@ openAddPopupButton.addEventListener('click', function () {
 //апдейт: пофиксила.
 //оверлейное
 
+startingCards.forEach(({name, link}) => {
+  cardsZone.append(createCard(name, link));
+});
+
 popups.forEach(element => { 
   element.addEventListener('click', (event) => {
-    if (event.target.classList.contains('popup_opened') || event.target.classList.contains('popup__close-button')) {
+  if (event.target.classList.contains('popup_opened') || event.target.classList.contains('popup__close-button')) {
       closePopup(element)}
   });
 });
 
+addPicForm.addEventListener('submit', createCustomCard);
+
 //изменение контента в кардсЗоне
 
-addPicForm.addEventListener('submit', createCustomCard);
+
 profileForm.addEventListener('submit', formEditSubmitHandler);
 
 //а в школьные годы с++ для начинающих давался мне легче. старею.
