@@ -38,7 +38,7 @@ export default class Card {
         this._newCard.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
     }
   
-    _createCard () {
+    createCard () {
         this._newCard = this._getCardTemplate;
         this._setData;
         this._setListeners;
@@ -46,8 +46,7 @@ export default class Card {
         return this._newCard;
   }
   
-    _createCustomCard (event) {
-        event.preventDefault();
+    /*_createCustomCard () {
         const name = picNameInput.value;
         const pic = picLinkInput.value;
         const renderedCard = createCard(name, pic);
@@ -55,7 +54,6 @@ export default class Card {
         picNameInput.value = '';
         picLinkInput.value = '';
         closePopup(popupAdd);
-    }
+    }*/
     
-
 }

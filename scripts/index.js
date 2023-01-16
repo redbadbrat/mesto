@@ -1,5 +1,7 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
 
+import Card from "./Card";
+
 //все переменные репатриировались в variables.js
 
 //ОТКРЫТЬ ВОРОТА! - теперь с крутым ловцом ивентов!
@@ -63,7 +65,6 @@ function formEditSubmitHandler (event) {
   closePopup(popupProfile);
 }
 
-
 //копирование темплейта, наполнение контентом, вставка, 6 раз, костыль - накрутка кнопок внутри цикла. брух.
 //known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
 
@@ -77,8 +78,20 @@ openAddPopupButton.addEventListener('click', function () {
 //апдейт: пофиксила.
 //оверлейное
 
+//ВОТ ТУТ ПОДУМАТЬ КА
+
+const renderCard = (cardData) => {
+  const name = picNameInput.value;
+  const link = picLinkInput.value;
+  const renderedCard = new Card(cardData);
+  cardsZone.prepend(renderedCard);
+  picNameInput.value = '';
+  picLinkInput.value = '';
+  closePopup(popupAdd);
+}
+
 startingCards.forEach(({name, link}) => {
-  cardsZone.append(createCard(name, link));
+  renderCard(name, link)
 });
 
 popups.forEach(element => { 
