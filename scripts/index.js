@@ -1,12 +1,10 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
 
-import Card from "./Card";
+//import startingCards from './sampleCards.js';
+
+console.log('check');
 
 //все переменные репатриировались в variables.js
-
-//ОТКРЫТЬ ВОРОТА! - теперь с крутым ловцом ивентов!
-
-//внутрь передаётся type - он отражает потребность в неактивной кнопке в попапе. если что, я могу просто давать false/true, но с примитивом код читается легче
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -31,22 +29,10 @@ function openPopupZoom(event) {
   openPopup(popupZoom);
 }
 
-//ЗАКРЫТЬ ВОРОТА! - теперь с крутым ловцом ивентов!
-
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
 }
-
-//версия 1 для кнопки еск - ОСТАВЛЕНА ДЛЯ ИСТОРИИ
-
-/*function closePopupEsc(popup, event) {
-  if (event.key === 'Escape' || event.key === 'Esc' || event.keyCode === "27") {
-    closePopup(popup);
-  }
-}*/
-
-//версия 2 - прилизанная 
 
 function closePopupEsc(event) {
   if (event.key === 'Escape' || event.key === 'Esc') {
@@ -56,8 +42,6 @@ function closePopupEsc(event) {
   }
 }
 
-//ЗАКРЫТЬ ВОРОТА, НО ЗАНЕСТИ ВНУТРЬ НАГРАБЛЕННОЕ!
-
 function formEditSubmitHandler (event) {
   event.preventDefault();
   userName.textContent = nameInput.value;
@@ -65,34 +49,25 @@ function formEditSubmitHandler (event) {
   closePopup(popupProfile);
 }
 
-//копирование темплейта, наполнение контентом, вставка, 6 раз, костыль - накрутка кнопок внутри цикла. брух.
-//known bugs - см.коммент выше. кто вообще использует циклы как из учебника 1995 года?
-
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', function () {
   disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
   openPopup(popupAdd);
 });
 
-//known bug - не давало вводить формы и закрывало по клику в любом месте
-//апдейт: пофиксила.
-//оверлейное
-
-//ВОТ ТУТ ПОДУМАТЬ КА
-
-const renderCard = (cardData) => {
+/*const renderCard = (name, link) => {
   const name = picNameInput.value;
   const link = picLinkInput.value;
-  const renderedCard = new Card(cardData);
+  const renderedCard = new Card({name, link});
   cardsZone.prepend(renderedCard);
   picNameInput.value = '';
   picLinkInput.value = '';
   closePopup(popupAdd);
-}
+}*/
 
-startingCards.forEach(({name, link}) => {
+/*startingCards.forEach((name, link) => {
   renderCard(name, link)
-});
+});*/
 
 popups.forEach(element => { 
   element.addEventListener('click', (event) => {
@@ -101,11 +76,72 @@ popups.forEach(element => {
   });
 });
 
-addPicForm.addEventListener('submit', createCustomCard);
-
-//изменение контента в кардсЗоне
-
-
+//addPicForm.addEventListener('submit', createCustomCard);
 profileForm.addEventListener('submit', formEditSubmitHandler);
 
-//а в школьные годы с++ для начинающих давался мне легче. старею.
+class Card {
+  constructor({name, link}) {
+      this._name = name;
+      this._link = link;
+  }
+
+  _getCardTemplate () {
+      const cardTemplate = document.querySelector('#card') //нашли темплейт по айди кард
+                          .content.querySelector('.element') //внутри темплейта нашли класс элемент
+                          .cloneNode(true); //скопировали ноду
+      return cardTemplate;
+  }
+
+  _deleteCard() {
+      this._newCard.remove();
+      //this._newCard = null;
+  }
+
+  _clickLikeButton () {
+      this._newCard.classList.toggle('element__like-button_clicked');
+  }
+  
+  _setListeners () {
+      this._newCard.querySelector('.element__like-button').addEventListener('click', () => this._clickLikeButton()); 
+      this._newCard.querySelector('.element__delete-button').addEventListener('click', () => this._deleteCard());
+      this._newCard.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
+  }
+
+  _setData () {
+    const linkProp = this._newCard.querySelector('.element__image');
+    linkProp.src = this._link;
+
+    const captionProp = this._newCard.querySelector('.element__caption');
+    captionProp.textContent = this._name;
+
+    const altProp = this._newCard.querySelector('.element__image');
+    altProp.alt = this._name;
+}
+
+  createCard () {
+      this._newCard = this._getCardTemplate();
+      this._setListeners();
+      this._setData();
+
+      return this._newCard;
+}
+
+  /*_createCustomCard () {
+      const name = picNameInput.value;
+      const pic = picLinkInput.value;
+      const renderedCard = createCard(name, pic);
+      cardsZone.prepend(renderedCard);
+      picNameInput.value = '';
+      picLinkInput.value = '';
+      closePopup(popupAdd);
+  }*/
+  
+};
+
+function createCardy() {
+  const cardy = new Card('nammmy', 'https://avatars.githubusercontent.com/u/102689681?s=48&v=4');
+  cardsZone.prepend(cardy.createCard());
+}
+
+createCardy();
+//export default openPopupZoom;

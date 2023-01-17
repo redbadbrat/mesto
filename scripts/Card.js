@@ -1,10 +1,8 @@
-import { startingCards } from './sampleCards.js';
-
-console.log(startingCards)
+//import openPopupZoom from './index.js'
 
 //так как ООП заняло у меня время, я объясняю сама себе свои действия. прямо по строкам. надеюсь, вас это не раздражает
 
-export default class Card {
+/*class Card {
     constructor({name, link}) {
         this._name = name;
         this._link = link;
@@ -46,7 +44,7 @@ export default class Card {
         return this._newCard;
   }
   
-    /*_createCustomCard () {
+    _createCustomCard () {
         const name = picNameInput.value;
         const pic = picLinkInput.value;
         const renderedCard = createCard(name, pic);
@@ -54,6 +52,8 @@ export default class Card {
         picNameInput.value = '';
         picLinkInput.value = '';
         closePopup(popupAdd);
-    }*/
+    }
     
 }
+
+export default Card;*/
