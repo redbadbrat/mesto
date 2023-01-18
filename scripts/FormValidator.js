@@ -1,7 +1,4 @@
-//в ТЗ было много селекторов, но не все были использованы, хотя всё работает.
-
-
-const validationSettings = {
+export const validationSettings = {
   formSelector: '.form',
   buttonSelector: '.popup__submit-button',
   inputErrorSelector: 'input_style_error',
@@ -9,75 +6,85 @@ const validationSettings = {
   buttonDisabled: 'popup__submit-button_disabled'
 }
 
-function showInputError (formElement, inputElement, errorMessage, settings) {
-  const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
-  inputElement.classList.add(settings.inputErrorSelector);
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add(settings.inputSpanErrorActive);
-};
+export class FormValidator {
 
-function hideInputError (formElement, inputElement, settings) {
-  const errorElement = formElement.querySelector(`.form__${inputElement.id}-error`);
-  inputElement.classList.remove(settings.inputErrorSelector);
-  errorElement.classList.remove(settings.inputSpanErrorActive);
-  errorElement.textContent = '';
-};
-
-function checkInputValidity(formElement, inputElement, settings) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
-  } else {
-    hideInputError(formElement, inputElement, settings);
+  constructor(formElement, settings) {
+    this._formElement = formElement;
+    this._settings = settings;
   }
-};
 
-function hasInvalidInput(inputList) {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  }); 
-};
+  //памагити
 
-function disableSubmitButton(buttonElement, settings) {
-  buttonElement.classList.add(settings.buttonDisabled);
-  buttonElement.disabled = true;
-};
+  _showInputError (inputElement) {
+    const errorElement = this._formElement.querySelector(`.form__${inputElement.id}-error`);
+    inputElement.classList.add(this._settings.inputErrorSelector);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(this._settings.inputSpanErrorActive);
+  };
 
-function enableSubmitButton(buttonElement, settings) {
-  buttonElement.classList.remove(settings.buttonDisabled);
-  buttonElement.disabled = false;
-};
+  _hideInputError (inputElement) {
+    const errorElement = this._formElement.querySelector(`.form__${inputElement.id}-error`);
+    inputElement.classList.remove(this._settings.inputErrorSelector);
+    errorElement.classList.remove(this._settings.inputSpanErrorActive);
+    errorElement.textContent = '';
+  };
 
-//я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
+  _checkInputValidity(inputElement) {
+    if (!inputElement.validity.valid) {
+      this._showInputError(inputElement);
+    } else {
+      this._hideInputError(inputElement);
+    }
+  };
 
-function toggleSubmitButton(inputList, buttonElement, settings) {
-  if (hasInvalidInput(inputList)) {
-    disableSubmitButton(buttonElement, settings);
-  } else {
-    enableSubmitButton(buttonElement, settings);
+  _hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    }); 
+  };
+
+  _disableSubmitButton() {
+    //buttonElement.classList.add(this._settings.buttonDisabled);
+    buttonElement.disabled = true;
+  };
+
+  _enableSubmitButton() {
+    //buttonElement.classList.remove(this._settings.buttonDisabled);
+    buttonElement.disabled = false;
+  };
+
+  //я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
+
+  _toggleSubmitButton(inputList) {
+    if (hasInvalidInput(inputList)) {
+      this._disableSubmitButton();
+    } else {
+      this._enableSubmitButton();
+    } 
+  };
+
+  _setEventListeners() {
+    const inputList = Array.from(this._formElement.querySelectorAll('.input'));
+    const buttonElement = this._formElement.querySelector(this._settings.buttonSelector);
+    this._toggleSubmitButton(inputList, buttonElement);
+
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', function () {
+        this._checkInputValidity(inputElement);
+        this._toggleSubmitButton(inputList);
+      });
+    });
+  };
+
+  //*орёт*
+
+  enableValidation(settings) {
+    formList = Array.from(document.querySelectorAll(settings.formSelector)); 
+    formList.forEach((formElement) => {
+      this._setEventListeners();
+    }); 
   } 
 };
 
-function setEventListeners(formElement, settings) {
-  const inputList = Array.from(formElement.querySelectorAll('.input'));
-  const buttonElement = formElement.querySelector(settings.buttonSelector);
-  toggleSubmitButton(inputList, buttonElement, settings);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement, settings);
-      toggleSubmitButton(inputList, buttonElement, settings);
-    });
-  });
-};
-
-function enableValidation(settings) {
-  formList = Array.from(document.querySelectorAll(settings.formSelector)); 
-  formList.forEach((formElement) => {
-    setEventListeners(formElement, settings);
-  }); 
-}
-
-enableValidation(validationSettings);
-
 //отдельную благодарность выражаю старшим студентам нашей когорты (и младшим студентам тоже!). 
-//без вас я бы повесилась на любимом шарфе
+//без вас я бы повесилась на любимом жёлтом шарфе

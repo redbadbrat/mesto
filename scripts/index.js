@@ -11,23 +11,30 @@ import {profileForm,
   cardsZone,
   openNamePopupButton,
   openAddPopupButton,
-  closeProfileButton,
-  closeAddButton,
-  closeZoomButton,
+  //closeProfileButton,
+  //closeAddButton,
+  //closeZoomButton,
   popups,
-  popupWindows,
+  //popupWindows,
   popupProfile,
   popupAdd,
   popupZoom,
   userName,
   userStatus} from './variables.js';
-
 import { startingCards } from './sampleCards.js'
 import Card from './Card.js';
+//import { validationSettings, FormValidator } from './FormValidator.js';
 
 console.log('check');
 
-//все переменные репатриировались в variables.js
+//все переменные репатриировались в variables.js. и правильно сделали
+
+//-----------------------------------------------
+
+//const formAddValidator = new FormValidator(addPicForm, validationSettings);
+//const formNameValidator = new FormValidator(profileForm, validationSettings);
+
+//-----------------------------------------------
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -74,39 +81,35 @@ function formEditSubmitHandler (event) {
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', function () {
-  disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
+  //у валидатора отпуск, ведь хоть что-то должно работать. и пока это не валидатор
+
+  //-----------------------------------------------
+
+  //disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
+
+  //----------------------------------------------- 
+
   openPopup(popupAdd);
 });
-
-/*function generateCard(name, link) {
-  const newCard = new Card(name, link);
-  newCard.createCard();
-  cardsZone.prepend(newCard.createCard());
-}*/
 
 const generateCard = (name, link) => {
   const newCard = new Card(name, link);
   return newCard.createCard();
 };
 
-/*const renderCardyyyyyy = (name, link) => {
-  const name = picNameInput.value;
-  const link = picLinkInput.value;
-  const renderedCard = new Card({name, link});
-  cardsZone.prepend(renderedCard);
-  picNameInput.value = '';
-  picLinkInput.value = '';
-  closePopup(popupAdd);
-};*/
-
-/*function renderCard (name, link) {
-  const newCard = new Card(name, link);
-  cardsZone.prepend(newCard.createCard());
-}*/
-
 startingCards.forEach(({name, link}) => {
   cardsZone.append(generateCard(name, link));
 });
+
+function renderCard(event) {
+  event.preventDefault();
+  const name = picNameInput.value;
+  const link = picLinkInput.value;
+  cardsZone.prepend(generateCard(name, link));
+  picNameInput.value = '';
+  picLinkInput.value = '';
+  closePopup(popupAdd);
+};
 
 popups.forEach(element => { 
   element.addEventListener('click', (event) => {
@@ -115,7 +118,15 @@ popups.forEach(element => {
   });
 });
 
-//addPicForm.addEventListener('submit', createCustomCard);
+//-----------------------------------------------
+
+//formAddValidator.enableValidation();
+//formNameValidator.enableValidation();
+
+//-----------------------------------------------
+
+addPicForm.addEventListener('submit', renderCard);
 profileForm.addEventListener('submit', formEditSubmitHandler);
+
 
 

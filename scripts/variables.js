@@ -22,14 +22,14 @@ export const cardsZone = document.querySelector('.elements');
 
 export const openNamePopupButton = document.querySelector('#openNamePopupButton');
 export const openAddPopupButton = document.querySelector('#openAddPopupButton');
-export const closeProfileButton = document.querySelector('#closeNamePopupButton');
-export const closeAddButton = document.querySelector('#closeAddPopupButton');
-export const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
+//export const closeProfileButton = document.querySelector('#closeNamePopupButton');
+//export const closeAddButton = document.querySelector('#closeAddPopupButton');
+//export const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 
 //поп-кошка
 
 export const popups = document.querySelectorAll('.popup');
-export const popupWindows = document.querySelectorAll('.popup__window');
+//export const popupWindows = document.querySelectorAll('.popup__window');
 export const popupProfile = document.querySelector('#formPopup');
 export const popupAdd = document.querySelector('#formPopupCard');
 export const popupZoom = document.querySelector('#zoomPopup');
