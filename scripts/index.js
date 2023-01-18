@@ -30,10 +30,8 @@ console.log('check');
 //все переменные репатриировались в variables.js. и правильно сделали
 
 //-----------------------------------------------
-
-//const formAddValidator = new FormValidator(addPicForm, validationSettings);
-//const formNameValidator = new FormValidator(profileForm, validationSettings);
-
+const formAddValidator = new FormValidator(addPicForm, validationSettings);
+const formNameValidator = new FormValidator(profileForm, validationSettings);
 //-----------------------------------------------
 
 function openPopup(popup) {
@@ -84,9 +82,7 @@ openAddPopupButton.addEventListener('click', function () {
   //у валидатора отпуск, ведь хоть что-то должно работать. и пока это не валидатор
 
   //-----------------------------------------------
-
-  //disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
-
+  disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
   //----------------------------------------------- 
 
   openPopup(popupAdd);
@@ -119,10 +115,8 @@ popups.forEach(element => {
 });
 
 //-----------------------------------------------
-
-//formAddValidator.enableValidation();
-//formNameValidator.enableValidation();
-
+formAddValidator.enableValidation();
+formNameValidator.enableValidation();
 //-----------------------------------------------
 
 addPicForm.addEventListener('submit', renderCard);

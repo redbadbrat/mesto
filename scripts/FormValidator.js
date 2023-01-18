@@ -78,11 +78,8 @@ export class FormValidator {
 
   //*орёт*
 
-  enableValidation(settings) {
-    formList = Array.from(document.querySelectorAll(settings.formSelector)); 
-    formList.forEach((formElement) => {
-      this._setEventListeners();
-    }); 
+  enableValidation() {
+    this._setEventListeners();
   } 
 };
 
