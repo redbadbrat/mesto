@@ -1,6 +1,29 @@
 //привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
 
-//import startingCards from './sampleCards.js';
+import {profileForm,
+  addPicForm,
+  nameInput,
+  statusInput,
+  picNameInput,
+  picLinkInput,
+  zoomPic,
+  zoomCaption,
+  cardsZone,
+  openNamePopupButton,
+  openAddPopupButton,
+  closeProfileButton,
+  closeAddButton,
+  closeZoomButton,
+  popups,
+  popupWindows,
+  popupProfile,
+  popupAdd,
+  popupZoom,
+  userName,
+  userStatus} from './variables.js';
+
+import { startingCards } from './sampleCards.js'
+import Card from './Card.js';
 
 console.log('check');
 
@@ -18,7 +41,7 @@ function openNameEditForm() {
   disableSubmitButton(popupProfile.querySelector(validationSettings.buttonSelector), validationSettings);
 }
 
-function openPopupZoom(event) {
+export function openPopupZoom(event) {
   console.log(event.target);
   event.preventDefault();
   const clicky = event.target.closest('.element');
@@ -55,7 +78,18 @@ openAddPopupButton.addEventListener('click', function () {
   openPopup(popupAdd);
 });
 
-/*const renderCard = (name, link) => {
+/*function generateCard(name, link) {
+  const newCard = new Card(name, link);
+  newCard.createCard();
+  cardsZone.prepend(newCard.createCard());
+}*/
+
+const generateCard = (name, link) => {
+  const newCard = new Card(name, link);
+  return newCard.createCard();
+};
+
+/*const renderCardyyyyyy = (name, link) => {
   const name = picNameInput.value;
   const link = picLinkInput.value;
   const renderedCard = new Card({name, link});
@@ -63,11 +97,16 @@ openAddPopupButton.addEventListener('click', function () {
   picNameInput.value = '';
   picLinkInput.value = '';
   closePopup(popupAdd);
+};*/
+
+/*function renderCard (name, link) {
+  const newCard = new Card(name, link);
+  cardsZone.prepend(newCard.createCard());
 }*/
 
-/*startingCards.forEach((name, link) => {
-  renderCard(name, link)
-});*/
+startingCards.forEach(({name, link}) => {
+  cardsZone.append(generateCard(name, link));
+});
 
 popups.forEach(element => { 
   element.addEventListener('click', (event) => {
@@ -79,69 +118,4 @@ popups.forEach(element => {
 //addPicForm.addEventListener('submit', createCustomCard);
 profileForm.addEventListener('submit', formEditSubmitHandler);
 
-class Card {
-  constructor({name, link}) {
-      this._name = name;
-      this._link = link;
-  }
 
-  _getCardTemplate () {
-      const cardTemplate = document.querySelector('#card') //нашли темплейт по айди кард
-                          .content.querySelector('.element') //внутри темплейта нашли класс элемент
-                          .cloneNode(true); //скопировали ноду
-      return cardTemplate;
-  }
-
-  _deleteCard() {
-      this._newCard.remove();
-      //this._newCard = null;
-  }
-
-  _clickLikeButton () {
-      this._newCard.classList.toggle('element__like-button_clicked');
-  }
-  
-  _setListeners () {
-      this._newCard.querySelector('.element__like-button').addEventListener('click', () => this._clickLikeButton()); 
-      this._newCard.querySelector('.element__delete-button').addEventListener('click', () => this._deleteCard());
-      this._newCard.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom);
-  }
-
-  _setData () {
-    const linkProp = this._newCard.querySelector('.element__image');
-    linkProp.src = this._link;
-
-    const captionProp = this._newCard.querySelector('.element__caption');
-    captionProp.textContent = this._name;
-
-    const altProp = this._newCard.querySelector('.element__image');
-    altProp.alt = this._name;
-}
-
-  createCard () {
-      this._newCard = this._getCardTemplate();
-      this._setListeners();
-      this._setData();
-
-      return this._newCard;
-}
-
-  /*_createCustomCard () {
-      const name = picNameInput.value;
-      const pic = picLinkInput.value;
-      const renderedCard = createCard(name, pic);
-      cardsZone.prepend(renderedCard);
-      picNameInput.value = '';
-      picLinkInput.value = '';
-      closePopup(popupAdd);
-  }*/
-  
-};
-
-function createCardy() {
-  const cardy = new Card('nammmy', 'https://avatars.githubusercontent.com/u/102689681?s=48&v=4');
-  cardsZone.prepend(cardy.createCard());
-}
-
-createCardy();
-//export default openPopupZoom;

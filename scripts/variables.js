@@ -2,39 +2,39 @@
 
 //инпуты
 
-const profileForm = document.querySelector('#profileForm');
-const addPicForm = document.querySelector('#addPicForm');
-const nameInput = document.querySelector('#input-name');
-const statusInput = document.querySelector('#input-status');
-const picNameInput = document.querySelector('#input-pic-name');
-const picLinkInput = document.querySelector('#input-pic-link');
+export const profileForm = document.querySelector('#profileForm');
+export const addPicForm = document.querySelector('#addPicForm');
+export const nameInput = document.querySelector('#input-name');
+export const statusInput = document.querySelector('#input-status');
+export const picNameInput = document.querySelector('#input-pic-name');
+export const picLinkInput = document.querySelector('#input-pic-link');
 
 //зум зум
 
-const zoomPic = document.querySelector('.zoom-element__picture');
-const zoomCaption = document.querySelector('.zoom-element__caption');
+export const zoomPic = document.querySelector('.zoom-element__picture');
+export const zoomCaption = document.querySelector('.zoom-element__caption');
 
 //зона карточек и темлпейт
 
-const cardsZone = document.querySelector('.elements');
+export const cardsZone = document.querySelector('.elements');
 
 //кнопки
 
-const openNamePopupButton = document.querySelector('#openNamePopupButton');
-const openAddPopupButton = document.querySelector('#openAddPopupButton');
-const closeProfileButton = document.querySelector('#closeNamePopupButton');
-const closeAddButton = document.querySelector('#closeAddPopupButton');
-const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
+export const openNamePopupButton = document.querySelector('#openNamePopupButton');
+export const openAddPopupButton = document.querySelector('#openAddPopupButton');
+export const closeProfileButton = document.querySelector('#closeNamePopupButton');
+export const closeAddButton = document.querySelector('#closeAddPopupButton');
+export const closeZoomButton = document.querySelector('#closeZoomPopupOverlay');
 
 //поп-кошка
 
-const popups = document.querySelectorAll('.popup');
-const popupWindows = document.querySelectorAll('.popup__window');
-const popupProfile = document.querySelector('#formPopup');
-const popupAdd = document.querySelector('#formPopupCard');
-const popupZoom = document.querySelector('#zoomPopup');
+export const popups = document.querySelectorAll('.popup');
+export const popupWindows = document.querySelectorAll('.popup__window');
+export const popupProfile = document.querySelector('#formPopup');
+export const popupAdd = document.querySelector('#formPopupCard');
+export const popupZoom = document.querySelector('#zoomPopup');
 
 //заголовки со статусом/именем
 
-const userName = document.querySelector('#userName');
-const userStatus = document.querySelector('#userStatus');
+export const userName = document.querySelector('#userName');
+export const userStatus = document.querySelector('#userStatus');
