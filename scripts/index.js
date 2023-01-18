@@ -23,7 +23,7 @@ import {profileForm,
   userStatus} from './variables.js';
 import { startingCards } from './sampleCards.js'
 import Card from './Card.js';
-//import { validationSettings, FormValidator } from './FormValidator.js';
+import { validationSettings, FormValidator } from './FormValidator.js';
 
 console.log('check');
 
