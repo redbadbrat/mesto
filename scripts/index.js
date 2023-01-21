@@ -1,4 +1,4 @@
-//привет! я едва понимаю, что тут происходит, поэтому всё в комментах. what a lovely piece of code
+//привет! я всё меньше понимаю что тут происходит, ну и ладно
 
 import {profileForm,
   addPicForm,
@@ -11,11 +11,7 @@ import {profileForm,
   cardsZone,
   openNamePopupButton,
   openAddPopupButton,
-  //closeProfileButton,
-  //closeAddButton,
-  //closeZoomButton,
   popups,
-  //popupWindows,
   popupProfile,
   popupAdd,
   popupZoom,
@@ -29,10 +25,8 @@ console.log('check');
 
 //все переменные репатриировались в variables.js. и правильно сделали
 
-//-----------------------------------------------
 const formAddValidator = new FormValidator(addPicForm, validationSettings);
 const formNameValidator = new FormValidator(profileForm, validationSettings);
-//-----------------------------------------------
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -43,7 +37,7 @@ function openNameEditForm() {
   openPopup(popupProfile);
   nameInput.value = userName.textContent;
   statusInput.value = userStatus.textContent;
-  disableSubmitButton(popupProfile.querySelector(validationSettings.buttonSelector), validationSettings);
+  //disableSubmitButton(popupProfile.querySelector(validationSettings.buttonSelector), validationSettings);
 }
 
 export function openPopupZoom(event) {
@@ -79,12 +73,7 @@ function formEditSubmitHandler (event) {
 
 openNamePopupButton.addEventListener('click', openNameEditForm);
 openAddPopupButton.addEventListener('click', function () {
-  //у валидатора отпуск, ведь хоть что-то должно работать. и пока это не валидатор
-
-  //-----------------------------------------------
-  disableSubmitButton(popupAdd.querySelector(validationSettings.buttonSelector), validationSettings);
-  //----------------------------------------------- 
-
+  formAddValidator._disableSubmitButton();
   openPopup(popupAdd);
 });
 
@@ -114,10 +103,8 @@ popups.forEach(element => {
   });
 });
 
-//-----------------------------------------------
 formAddValidator.enableValidation();
 formNameValidator.enableValidation();
-//-----------------------------------------------
 
 addPicForm.addEventListener('submit', renderCard);
 profileForm.addEventListener('submit', formEditSubmitHandler);

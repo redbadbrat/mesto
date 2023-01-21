@@ -3,11 +3,10 @@ export const validationSettings = {
   buttonSelector: '.popup__submit-button',
   inputErrorSelector: 'input_style_error',
   inputSpanErrorActive: 'form__input-error_active',
-  buttonDisabled: 'popup__submit-button_disabled'
-}
+  buttonDisabled: 'popup__submit-button_disabled',
+};
 
 export class FormValidator {
-
   constructor(formElement, settings) {
     this._formElement = formElement;
     this._settings = settings;
@@ -15,19 +14,19 @@ export class FormValidator {
 
   //памагити
 
-  _showInputError (inputElement) {
+  _showInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.form__${inputElement.id}-error`);
     inputElement.classList.add(this._settings.inputErrorSelector);
-    errorElement.textContent = errorMessage;
+    errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._settings.inputSpanErrorActive);
-  };
+  }
 
-  _hideInputError (inputElement) {
+  _hideInputError(inputElement) {
     const errorElement = this._formElement.querySelector(`.form__${inputElement.id}-error`);
     inputElement.classList.remove(this._settings.inputErrorSelector);
     errorElement.classList.remove(this._settings.inputSpanErrorActive);
     errorElement.textContent = '';
-  };
+  }
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
@@ -35,53 +34,53 @@ export class FormValidator {
     } else {
       this._hideInputError(inputElement);
     }
-  };
+  }
 
   _hasInvalidInput(inputList) {
     return inputList.some((inputElement) => {
       return !inputElement.validity.valid;
-    }); 
-  };
+    });
+  }
 
   _disableSubmitButton() {
-    //buttonElement.classList.add(this._settings.buttonDisabled);
-    buttonElement.disabled = true;
-  };
+    this.buttonElement.classList.add(this._settings.buttonDisabled);
+    this.buttonElement.disabled = true;
+  }
 
   _enableSubmitButton() {
-    //buttonElement.classList.remove(this._settings.buttonDisabled);
-    buttonElement.disabled = false;
-  };
+    this.buttonElement.classList.remove(this._settings.buttonDisabled);
+    this.buttonElement.disabled = false;
+  }
 
   //я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
 
   _toggleSubmitButton(inputList) {
-    if (hasInvalidInput(inputList)) {
+    if (this._hasInvalidInput(this.inputList)) {
       this._disableSubmitButton();
     } else {
       this._enableSubmitButton();
-    } 
-  };
+    }
+  }
 
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll('.input'));
-    const buttonElement = this._formElement.querySelector(this._settings.buttonSelector);
-    this._toggleSubmitButton(inputList, buttonElement);
+    this.inputList = Array.from(this._formElement.querySelectorAll('.input'));
+    this.buttonElement = this._formElement.querySelector(this._settings.buttonSelector);
+    this._toggleSubmitButton();
 
-    inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function () {
+    this.inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
-        this._toggleSubmitButton(inputList);
+        this._toggleSubmitButton();
       });
     });
-  };
+  }
 
   //*орёт*
 
   enableValidation() {
     this._setEventListeners();
-  } 
-};
+  }
+}
 
-//отдельную благодарность выражаю старшим студентам нашей когорты (и младшим студентам тоже!). 
+//отдельную благодарность выражаю старшим студентам нашей когорты (и младшим студентам тоже!).
 //без вас я бы повесилась на любимом жёлтом шарфе
