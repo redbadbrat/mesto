@@ -1,11 +1,3 @@
-export const validationSettings = {
-  formSelector: '.form',
-  buttonSelector: '.popup__submit-button',
-  inputErrorSelector: 'input_style_error',
-  inputSpanErrorActive: 'form__input-error_active',
-  buttonDisabled: 'popup__submit-button_disabled',
-};
-
 export class FormValidator {
   constructor(formElement, settings) {
     this._formElement = formElement;
@@ -36,13 +28,13 @@ export class FormValidator {
     }
   }
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this.inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _disableSubmitButton() {
+  disableSubmitButton() {
     this.buttonElement.classList.add(this._settings.buttonDisabled);
     this.buttonElement.disabled = true;
   }
@@ -54,9 +46,9 @@ export class FormValidator {
 
   //я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
 
-  _toggleSubmitButton(inputList) {
+  _toggleSubmitButton() {
     if (this._hasInvalidInput(this.inputList)) {
-      this._disableSubmitButton();
+      this.disableSubmitButton();
     } else {
       this._enableSubmitButton();
     }

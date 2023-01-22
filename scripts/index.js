@@ -1,31 +1,32 @@
-//привет! я всё меньше понимаю что тут происходит, ну и ладно
+//upd: не переживайте, я отстаю именно по причине того, что стараюсь понять своими 2 извилинами. да и я так, скорее про жизнь в целом
+//спасибо за ваши комментарии и заметки, они мне помогли!
 
 import {profileForm,
-  addPicForm,
+  picAddForm,
   nameInput,
   statusInput,
   picNameInput,
   picLinkInput,
-  zoomPic,
-  zoomCaption,
+  picZoom,
+  captionZoom,
   cardsZone,
-  openNamePopupButton,
-  openAddPopupButton,
+  namePopupButtonOpen,
+  addPopupButtonOpen,
   popups,
   popupProfile,
   popupAdd,
   popupZoom,
   userName,
-  userStatus} from './variables.js';
-import { startingCards } from './sampleCards.js'
+  userStatus,
+  validationSettings,
+  cardCreationSettings,
+  startingCards } from './variables.js';
 import Card from './Card.js';
-import { validationSettings, FormValidator } from './FormValidator.js';
-
-console.log('check');
+import { FormValidator } from './FormValidator.js';
 
 //все переменные репатриировались в variables.js. и правильно сделали
 
-const formAddValidator = new FormValidator(addPicForm, validationSettings);
+const formAddValidator = new FormValidator(picAddForm, validationSettings);
 const formNameValidator = new FormValidator(profileForm, validationSettings);
 
 function openPopup(popup) {
@@ -44,9 +45,9 @@ export function openPopupZoom(event) {
   console.log(event.target);
   event.preventDefault();
   const clicky = event.target.closest('.element');
-  zoomCaption.textContent = clicky.querySelector('.element__caption').textContent;
-  zoomPic.src = clicky.querySelector('.element__image').src;
-  zoomPic.alt = clicky.querySelector('.element__image').alt;
+  captionZoom.textContent = clicky.querySelector('.element__caption').textContent;
+  picZoom.src = clicky.querySelector('.element__image').src;
+  picZoom.alt = clicky.querySelector('.element__image').alt;
   popupZoom.classList.add('popup_dark');
   openPopup(popupZoom);
 }
@@ -64,33 +65,33 @@ function closePopupEsc(event) {
   }
 }
 
-function formEditSubmitHandler (event) {
+function handleProfileFormSubmit (event) {
   event.preventDefault();
   userName.textContent = nameInput.value;
   userStatus.textContent = statusInput.value;
   closePopup(popupProfile);
 }
 
-openNamePopupButton.addEventListener('click', openNameEditForm);
-openAddPopupButton.addEventListener('click', function () {
-  formAddValidator._disableSubmitButton();
+namePopupButtonOpen.addEventListener('click', openNameEditForm);
+addPopupButtonOpen.addEventListener('click', function () {
+  formAddValidator.disableSubmitButton();
   openPopup(popupAdd);
 });
 
 const generateCard = (name, link) => {
-  const newCard = new Card(name, link);
+  const newCard = new Card(name, link, cardCreationSettings);
   return newCard.createCard();
 };
 
 startingCards.forEach(({name, link}) => {
-  cardsZone.append(generateCard(name, link));
+  cardsZone.append(generateCard(name, link, cardCreationSettings));
 });
 
-function renderCard(event) {
+function handleCardFormSubmit(event) {
   event.preventDefault();
   const name = picNameInput.value;
   const link = picLinkInput.value;
-  cardsZone.prepend(generateCard(name, link));
+  cardsZone.prepend(generateCard(name, link, cardCreationSettings));
   picNameInput.value = '';
   picLinkInput.value = '';
   closePopup(popupAdd);
@@ -106,8 +107,8 @@ popups.forEach(element => {
 formAddValidator.enableValidation();
 formNameValidator.enableValidation();
 
-addPicForm.addEventListener('submit', renderCard);
-profileForm.addEventListener('submit', formEditSubmitHandler);
+picAddForm.addEventListener('submit', handleCardFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 
