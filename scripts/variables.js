@@ -19,9 +19,11 @@ export const cardsZone = document.querySelector('.elements');
 //кнопки
 
 export const namePopupButtonOpen = document.querySelector('#openNamePopupButton'); //переименовано 
-export const addPopupButtonOpen = document.querySelector('#openAddPopupButton'); //переименовано 
+export const popupAddButtonOpen = document.querySelector('#openAddPopupButton'); //переименовано 
 //здесь add всё же не выполняет функции глагола-сказуемого, а указывает на стандартное название формы. но будем честны, само название было неудачным. стоило бы выбрать creation или adding, но будем опираться на add 
 //я не знаю, составное подлежащее какое-то? хотя бы не сказуемое 
+
+//состязание лингвистов окончилось победой формальной логики построения кода. чёрт! 
 
 //поп-кошка
 
@@ -35,7 +37,7 @@ export const popupZoom = document.querySelector('#zoomPopup');
 export const userName = document.querySelector('#userName');
 export const userStatus = document.querySelector('#userStatus');
 
-//новенькие в блоки, покажите им клуб кожевников 
+//новенькие в блоке, покажите им клуб кожевников 
 
 export const validationSettings = {
     formSelector: '.form',

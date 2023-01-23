@@ -1,5 +1,7 @@
-//upd: не переживайте, я отстаю именно по причине того, что стараюсь понять своими 2 извилинами. да и я так, скорее про жизнь в целом
-//спасибо за ваши комментарии и заметки, они мне помогли!
+//на самом деле я уверена, что мои 40-50 извилин очень стараются, а 2 из них просто много волнуются. 
+//хорошего вам дня и удачи в наши непростые времена
+
+//Ксения
 
 import {profileForm,
   picAddForm,
@@ -11,7 +13,7 @@ import {profileForm,
   captionZoom,
   cardsZone,
   namePopupButtonOpen,
-  addPopupButtonOpen,
+  popupAddButtonOpen,
   popups,
   popupProfile,
   popupAdd,
@@ -73,7 +75,7 @@ function handleProfileFormSubmit (event) {
 }
 
 namePopupButtonOpen.addEventListener('click', openNameEditForm);
-addPopupButtonOpen.addEventListener('click', function () {
+popupAddButtonOpen.addEventListener('click', function () {
   formAddValidator.disableSubmitButton();
   openPopup(popupAdd);
 });
