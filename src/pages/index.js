@@ -44,16 +44,21 @@ zoomedCard.setEventListeners();
   zoomedCard.open(name, link)
 }*/
 
+function createCard(inputValues) {
+  const newCard = new Card(inputValues, cardCreationSettings, 
+  () => {zoomedCard.open(inputValues.name, inputValues.link)})
+  const newCardElement = newCard.createCard();
+  return newCardElement;
+};
+
 const cardList = new Section({
   items: startingCards, 
-  renderer: (item) => {
-  const newCard = new Card(item, cardCreationSettings, 
-    () => {zoomedCard.open(item.name, item.link)});
+  renderer: (inputValues) => {
+  const newCardElement = createCard(inputValues);
   //нужна пояснительная бригада
   //на строчке 49 есть заготовка функции, которую я просот хотела использовать здесь, но она вместо этого выдавала мне
   //мгновенное открытие зума и отсутвтие листенеров на других карточках. почему безымянная стрелка победила? (кроме того, что она была в примере)
   //победила стрелка, победил и пластмассовый мир. вот так.
-  const newCardElement = newCard.createCard();
   cardList.addDefaultItem(newCardElement);
   //сюда идёт prepend, как в какой-то далёкой пр из прошлого. для всего остального мастеркард и append
 }}, 
@@ -68,18 +73,16 @@ const currentUserInfo = new UserInfo(userName, userStatus);
 //------сектор попапов------
 
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
-  (obj) => {
-    const newCard = new Card(obj, cardCreationSettings, 
-      () => {zoomedCard.open(obj.name, obj.link)});
-    const newCardElement = newCard.createCard();
+  (inputValues) => {
+    const newCardElement = createCard(inputValues);
     cardList.addItem(newCardElement); //append
     popupWithFormAdd.close();
   }
 );
 
 const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
-  (obj) => {
-    currentUserInfo.setUserInfo(obj.name, obj.status)
+  (inputValues) => {
+    currentUserInfo.setUserInfo(inputValues.name, inputValues.status)
     popupWithFormProfile.close();
   }
 );

@@ -9,11 +9,6 @@ export const statusInput = document.querySelector('#input-status');
 export const picNameInput = document.querySelector('#input-pic-name');
 export const picLinkInput = document.querySelector('#input-pic-link');
 
-//зум зум
-
-export const picZoom = document.querySelector('.zoom-element__picture'); //переименовано
-export const captionZoom = document.querySelector('.zoom-element__caption'); //переименовано
-
 //зона карточек и темлпейт
 
 export const cardsZone = document.querySelector('.elements');
