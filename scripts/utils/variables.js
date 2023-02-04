@@ -28,9 +28,6 @@ export const popupAddButtonOpen = document.querySelector('#openAddPopupButton');
 //поп-кошка
 
 export const popups = document.querySelectorAll('.popup');
-export const popupProfile = document.querySelector('#formPopup');
-export const popupAdd = document.querySelector('#formPopupCard');
-export const popupZoom = document.querySelector('#zoomPopup');
 
 //заголовки со статусом/именем
 
@@ -53,6 +50,21 @@ export const cardCreationSettings = {
     likeButtonSelector: '.element__like-button',
     likeClickedSelector: 'element__like-button_clicked'
 };
+
+//почему всё везде в объектах и их ТАК МНОГО?
+//я просто люблю выпендриваться
+//если я не усложняю/упрощаю код завитушками, проверьте, жива ли я
+
+export const popupSettings = {
+    buttonExitSelector: '.popup__close-button',
+    buttonSubmitSelector: '.popup__submit-button'
+}
+
+export const popupTypesList = {
+    popupProfile: '#formPopup',
+    popupAdd: '#formPopupCard',
+    popupZoom: '#zoomPopup'
+}
 
 //помню, мне в отзыве на диплом написали, что всё чудесно, но форматирование у вас как у пьяного ворда. так было все курсовые работы
 //и в гайде 2 пробела, в где-то в теории было про 4 пробела?

@@ -9,7 +9,7 @@
     <meta name="author" content="Ксения Тельманова">
     <link rel="stylesheet" href="./pages/index.css">
     
-    <script type="module" src="./scripts/index.js" defer></script>
+    <script type="module" src="./scripts/pages/index.js" defer></script>
 </head>
 
 
@@ -81,10 +81,10 @@
                     <form class="popup-add__form form popup__form" name="form" method="post" id="addPicForm" novalidate>
                         <fieldset class="popup__fieldset-add fieldset">
                             <input class="input" type="text" placeholder="Название" 
-                            name="picName" id="input-pic-name" minlength="2" maxlength="30" required>
+                            name="name" id="input-pic-name" minlength="2" maxlength="30" required>
                             <span class="form__input-error form__input-pic-name-error"> </span>
                             <input class="input" type="url" placeholder="Ссылка на картинку" 
-                            name="picLink" id="input-pic-link" required>
+                            name="link" id="input-pic-link" required>
                             <span class="form__input-error form__input-pic-link-error"> </span>
                             <button class="popup__submit-button popup-add__submit-button button" type="submit" id="addPicSubmitButton">Создать
                             </button>

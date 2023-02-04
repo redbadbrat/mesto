@@ -1,13 +1,12 @@
-import { openPopupZoom } from './index.js';
-
 //так как ООП заняло у меня время, я объясняю сама себе свои действия. прямо по строкам. надеюсь, вас это не раздражает
 
 export default class Card {
     //я видела заметку про передачу объекта, я тоже думала об этом - сделаю, но сейчас tight on time, перепишу в свободную минутку. спасибо
-    constructor(name, link, templateSettings) {
+    constructor(data, templateSettings, handleCardClick) {
         this._templateSettings = templateSettings;
-        this._name = name;
-        this._link = link;
+        this._name = data.name; //переписала передачу через объект
+        this._link = data.link;
+        this._handleCardClick = handleCardClick;
     }
   
     _getCardTemplate () {
@@ -35,9 +34,11 @@ export default class Card {
     
     _setListeners () {
         this._findCurrentLikeButton();
+        //однажды на вебинаре я увидела стрелочные функции в листенерах и так их и делаю.
+        //без них теряется контекст, так?
         this._newCard.querySelector('.element__like-button').addEventListener('click', () => this._handleLikeClick()); 
         this._newCard.querySelector('.element__delete-button').addEventListener('click', () => this._handleCardDelete());
-        this._newCard.querySelector('.element__image-overlay').addEventListener('click', openPopupZoom); //импорт не работает - почему?
+        this._newCard.querySelector('.element__image-overlay').addEventListener('click', this._handleCardClick);
     }
   
     _setData () {
