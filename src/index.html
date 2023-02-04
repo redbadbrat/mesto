@@ -7,9 +7,8 @@
     <meta name="description" content="Мини-соцсеть для обмена фото из лучших мест мира">
     <meta name="keywords" content="Путешествия, природа, фотография, фото">
     <meta name="author" content="Ксения Тельманова">
-    <link rel="stylesheet" href="./pages/index.css">
-    
-    <script type="module" src="./scripts/pages/index.js" defer></script>
+    <!--<link rel="stylesheet" href="./pages/index.css">
+    <script type="module" src="./scripts/pages/index.js" defer></script>-->
 </head>
 
 
@@ -23,7 +22,7 @@
         <main>
 
             <section class="profile">
-                <img class="profile__avatar" src="./images/portrait2.jpg" alt="ваш аватар. вы отлично выглядите сегодня!">
+                <img class="profile__avatar" src="<%=require('./images/portrait2.jpg')%>" alt="ваш аватар. вы отлично выглядите сегодня!">
                 <div class="profile__profile-info">
                     <!--сделала отдельные классы под нейм и статус. если бы это была большая соцсеть, 
                         нам бы пришлось их юзать в других местах-->

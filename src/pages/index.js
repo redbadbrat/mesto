@@ -1,24 +1,18 @@
 //на самом деле я уверена, что мои 40-50 извилин очень стараются, а 2 из них просто много волнуются. не могу их в этом винить 
 //хорошего вам дня и удачи в наши непростые времена,
 //Ксения
-
+import './index.css';
 import {profileForm,
   picAddForm,
   nameInput,
   statusInput,
-  picNameInput,
-  picLinkInput,
-  picZoom,
-  captionZoom,
   cardsZone,
   namePopupButtonOpen,
   popupAddButtonOpen,
-  popups,
   userName,
   userStatus,
   validationSettings,
   cardCreationSettings,
-  popupSettings,
   startingCards,
   popupTypesList } from '../utils/variables.js';
 

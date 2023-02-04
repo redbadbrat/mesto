@@ -1,3 +1,5 @@
+
+
 //инпуты
 
 export const profileForm = document.querySelector('#profileForm');
@@ -72,27 +74,28 @@ export const popupTypesList = {
 export const startingCards = [
     {
         name: 'Архыз',
-        link: './images/samples/arkhyz.jpg',
+        link: 'https://cdn.midjourney.com/0760f8ae-9656-4ba2-995f-326b13883c92/grid_0.png',
     },
     {
         name: 'Озеро Байкал',
-        link: './images/samples/baikal.jpg',
+        link: 'https://cdn.midjourney.com/094bbcf8-d66d-4e4d-ab77-4100138b962b/grid_0.png',
     },
     {
-        name: 'Эльбрус',
-        link: './images/samples/elbrus.jpg',
+        name: 'Промыслы в Якутии',
+        link: 'https://cdn.midjourney.com/7c936274-06a5-4b41-85c4-fcff74c4138a/grid_0.png',
     },
     {
-        name: 'Карелия',
-        link: './images/samples/karelia.jpg',
+        name: 'Борис Ельцин',
+        link: 'https://cdn.midjourney.com/5865108b-4a27-4c18-83ed-e73897c1aa18/grid_0.png',
     },
     {
         name: 'Сахалин',
-        link: './images/samples/sakhalyn.jpg',
+        link: 'https://cdn.midjourney.com/4fdf5234-3ce5-43a1-9371-f133dcf0918e/grid_0.png',
     },
     {
         name: 'Териберка, Мурманская область',
-        link: './images/samples/teriberka.jpg',
+        link: 'https://cdn.midjourney.com/44b9ef3a-b2a9-4c5a-9814-0a7a66e1f9d7/grid_0.png',
     }
 ];
+
 
