@@ -4,8 +4,8 @@ import { popupSettings } from '../utils/variables.js';
 export default class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
-        this._picZoom = document.querySelector('.zoom-element__picture');
-        this._captionZoom = document.querySelector('.zoom-element__caption');
+        this._picZoom = this._popup.querySelector('.zoom-element__picture');
+        this._captionZoom = this._popup.querySelector('.zoom-element__caption');
     }
 
     open(name, link) {
