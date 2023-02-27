@@ -1,6 +1,5 @@
-//на самом деле я уверена, что мои 40-50 извилин очень стараются, а 2 из них просто много волнуются. не могу их в этом винить 
-//хорошего вам дня и удачи в наши непростые времена,
-//Ксения
+//HERE WE GO AGAIN YOPTA
+
 import './index.css';
 import {profileForm,
   picAddForm,
@@ -22,9 +21,20 @@ import FormValidator from '../components/FormValidator.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
-
+import API from '../components/API';
+import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
 //все переменные репатриировались в variables.js. и правильно сделали
+
+//------сектор подрубания API------
+  
+const api = new API({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-58',
+  headers: {
+    authorization: '41d3be90-8a0b-4c9a-b544-2c05d7a8fad5',
+    'Content-Type': 'application/json'
+  } 
+});
 
 //------сектор валидации------
 
@@ -36,17 +46,17 @@ formNameValidator.enableValidation();
 
 //------сектор создания и генерёжки карточек------
 
-//предложили вынести кардклик снаружи, "иначе без пол-литра не разобраться". ну ладно :(
-//upd: их предложение не сработало, так что берите пол-литра
 const zoomedCard = new PopupWithImage(popupTypesList.popupZoom);
 zoomedCard.setEventListeners();
-/*function handleCardClick (name, link) {
-  zoomedCard.open(name, link)
-}*/
+const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion);
+deletionPopup.setEventListeners();
 
 function createCard(inputValues) {
   const newCard = new Card(inputValues, cardCreationSettings, 
-  () => {zoomedCard.open(inputValues.name, inputValues.link)})
+                  () => {zoomedCard.open(inputValues.name, inputValues.link)},
+                  () => {}
+  )
+
   const newCardElement = newCard.createCard();
   return newCardElement;
 };
@@ -55,12 +65,7 @@ const cardList = new Section({
   items: startingCards, 
   renderer: (inputValues) => {
   const newCardElement = createCard(inputValues);
-  //нужна пояснительная бригада
-  //на строчке 49 есть заготовка функции, которую я просот хотела использовать здесь, но она вместо этого выдавала мне
-  //мгновенное открытие зума и отсутвтие листенеров на других карточках. почему безымянная стрелка победила? (кроме того, что она была в примере)
-  //победила стрелка, победил и пластмассовый мир. вот так.
   cardList.addDefaultItem(newCardElement);
-  //сюда идёт prepend, как в какой-то далёкой пр из прошлого. для всего остального мастеркард и append
 }}, 
 cardsZone);
 
@@ -75,7 +80,7 @@ const currentUserInfo = new UserInfo(userName, userStatus);
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
   (inputValues) => {
     const newCardElement = createCard(inputValues);
-    cardList.addItem(newCardElement); //append
+    cardList.addItem(newCardElement);
     popupWithFormAdd.close();
   }
 );
@@ -103,7 +108,10 @@ namePopupButtonOpen.addEventListener('click', () => {
   console.log(currentUserInfo.getUserInfo())
 });
 
+//------Ашкелон------
 //------сектор газа------
+
+
 
 
 

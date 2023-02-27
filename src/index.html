@@ -22,10 +22,9 @@
         <main>
 
             <section class="profile">
+                <button class="profile__avatar-overlay popup-button"></button>
                 <img class="profile__avatar" src="<%=require('./images/portrait2.jpg')%>" alt="ваш аватар. вы отлично выглядите сегодня!">
                 <div class="profile__profile-info">
-                    <!--сделала отдельные классы под нейм и статус. если бы это была большая соцсеть, 
-                        нам бы пришлось их юзать в других местах-->
                     <div class="profile__name-area">
                         <div class="profile__first-line">
                             <h1 class="profile__name name" id="userName">Жак-Ив Кусто</h1>
@@ -48,7 +47,7 @@
 
         <!--поп-ап данных автора страницы-->
         
-        <div class="popup" id="formPopup" type="button">
+        <div class="popup" id="formPopup">
             <div class="popup__window popup-name-edit">
                 <button class="popup__close-button button" type="button" id="closeNamePopupButton"></button>
                 <div class="popup__container popup-name-edit__container">
@@ -71,7 +70,7 @@
 
         <!--поп-ап добавления картинки-->
 
-        <div class="popup" id="formPopupCard" type="button">
+        <div class="popup" id="formPopupCard">
             <div class="popup__window popup-add">
                 <button class="popup__close-button button" type="button" id="closeAddPopupButton"></button>
                 <div class="popup__container popup-add__container">
@@ -93,12 +92,45 @@
             </div>
         </div>
 
-        <div class="popup" id="zoomPopup" type="button">
+        <div class="popup" id="zoomPopup">
             <div class="zoom-element">
                 <button class="popup__close-button button" type="button" id="closeZoomPopupOverlay"></button>
                 <div class="zoom-element__container">
                     <img class="zoom-element__picture" src="#">
-                    <h3 class="zoom-element__caption">хоба</h3>
+                    <h3 class="zoom-element__caption">ыыыыыыы</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="formDeletePopupButton">
+            <div class="popup__window popup-delete-edit">
+                <button class="popup__close-button button" type="button" id="closeDeletePopupButton"></button>
+                <div class="popup__container popup-delete__container">
+                    <h2 class="popup__header popup-delete__header">Вы уверены?</h2>
+                    <form class="popup-delete__form form popup__form" name="form" method="post" id="deleteSubmit" novalidate>
+                        <fieldset class="popup__fieldset-profile fieldset">
+                            <button class="popup__submit-button popup-delete__submit-button button" type="submit" id="submitButton">Дя
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="avatarPopup">
+            <div class="popup__window popup-avatar">
+                <button class="popup__close-button button" type="button" id="closeAvatarPopupButton"></button>
+                <div class="popup__container popup-avatar__container">
+                    <h2 class="popup__header popup-avatar__header">Обновить аватар</h2>
+                    <form class="popup-avatar__form form popup__form" name="form" method="post" id="avatarForm" novalidate>
+                        <fieldset class="popup__fieldset-profile fieldset">
+                            <input class="input" type="url" placeholder="Какой вы сегодня?" 
+                            name="avatar" id="input-avatar" required>
+                            <span class="form__input-error form__input-avatar-error"> </span>
+                            <button class="popup__submit-button popup-avatar__submit-button button" type="submit" id="submitButton">Сохранить
+                            </button>
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
@@ -110,7 +142,10 @@
                 <button class="element__delete-button button" aria-label="удалить карточку" type="button" id="delete"></button>
                 <div class="element__caption-area">
                     <h2 class="element__caption"></h2>
-                    <button class="element__like-button button" aria-label="нравится" type="button" id="like"></button>
+                    <div class="element__like-container">
+                        <button class="element__like-button button" aria-label="нравится" type="button" id="like"></button>
+                        <h3 class="element__like-counter">0</h3>
+                    </div>
                 </div>
             </article>
         </template>

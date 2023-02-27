@@ -60,12 +60,10 @@ export const popupSettings = {
 export const popupTypesList = {
     popupProfile: '#formPopup',
     popupAdd: '#formPopupCard',
-    popupZoom: '#zoomPopup'
+    popupZoom: '#zoomPopup',
+    popupCardDeletion: '#formDeletePopupButton'
 }
 
-//помню, мне в отзыве на диплом написали, что всё чудесно, но форматирование у вас как у пьяного ворда. так было все курсовые работы
-//и в гайде 2 пробела, в где-то в теории было про 4 пробела?
-  
 export const startingCards = [
     {
         name: 'Архыз',
