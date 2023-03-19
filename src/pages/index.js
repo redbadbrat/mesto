@@ -13,7 +13,9 @@ import {profileForm,
   validationSettings,
   cardCreationSettings,
   startingCards,
-  popupTypesList } from '../utils/variables.js';
+  popupTypesList, 
+  buttonSubmit,
+  userAvatar} from '../utils/variables.js';
 
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -35,6 +37,22 @@ const api = new API({
     'Content-Type': 'application/json'
   } 
 });
+
+//------сектор вспомогательный------
+
+function showLoading() {
+  buttonSubmit.textContent = 'Сохранение...';
+}
+
+showLoading;
+
+api.getUserData()
+  .then(userData => {
+    console.log(userData.name);
+  })
+  .catch(error => {
+    console.error('Error fetching user data:', error);
+  });
 
 //------сектор валидации------
 
@@ -73,7 +91,7 @@ cardList.renderElements();
 
 //------сектор юзеринфо------
 
-const currentUserInfo = new UserInfo(userName, userStatus);
+const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
 
 //------сектор попапов------
 

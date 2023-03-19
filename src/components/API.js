@@ -17,12 +17,10 @@ export default class API {
         const currentURL = `${this._url + '/users/me'}`;
         return fetch(currentURL , {
             method: 'GET',
-            headers: {
-                authorization: this._headers
-            }
+            headers: this._headers
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 
@@ -31,26 +29,18 @@ export default class API {
         return fetch(currentURL , {
             //я знаю, что get это дефолтный метод. но я путаюсь без явного объявления
             method: 'GET',
-            headers: {
-                authorization: this._headers
-            }
+            headers: this._headers
         })
         .then(res => {
             this.checker(res);
         })
     }
 
-    setDefaultData() {
-        return Promise.all([this.getUserData(), this.getInitialCards()]);
-    }
-
     editUserProfile(userInfo) {
         const currentURL = `${this._url + '/users/me'}`;
         return fetch(currentURL , {
             method: 'PATCH',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
             body: JSON.stringify(userInfo)
         })
         .then(res => {
@@ -62,9 +52,7 @@ export default class API {
         const currentURL = `${this._url + '/cards'}`;
         return fetch(currentURL , {
             method: 'POST',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
             body: JSON.stringify(cardInfo)
         })
         .then(res => {
@@ -90,9 +78,7 @@ export default class API {
         const currentURL = `${this._url + '/cards/' + cardID}`;
         return fetch(currentURL , {
             method: 'DELETE',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
         })
         .then(res => {
             this.checker(res);
@@ -103,9 +89,7 @@ export default class API {
         const currentURL = `${this._url + '/cards/' + cardID + '/likes'}`;
         return fetch(currentURL , {
             method: 'PUT',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
         })
         .then(res => {
             this.checker(res);
@@ -116,9 +100,7 @@ export default class API {
         const currentURL = `${this._url + '/cards/' + cardID + '/likes'}`;
         return fetch(currentURL , {
             method: 'DELETE',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
         })
         .then(res => {
             this.checker(res);
@@ -129,9 +111,7 @@ export default class API {
         const currentURL = `${this._url + '/users/me/avatar'}`;
         return fetch(currentURL , {
             method: 'PATCH',
-            headers: {
-                authorization: this._headers
-            },
+            headers: this._headers,
             body: JSON.stringify(avatar)
         })
         .then(res => {

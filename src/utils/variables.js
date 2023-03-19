@@ -1,5 +1,3 @@
-
-
 //инпуты
 
 export const profileForm = document.querySelector('#profileForm');
@@ -17,8 +15,7 @@ export const cardsZone = document.querySelector('.elements');
 
 export const namePopupButtonOpen = document.querySelector('#openNamePopupButton'); //переименовано 
 export const popupAddButtonOpen = document.querySelector('#openAddPopupButton'); //переименовано 
-//здесь add всё же не выполняет функции глагола-сказуемого, а указывает на стандартное название формы. но будем честны, само название было неудачным. стоило бы выбрать creation или adding, но будем опираться на add 
-//я не знаю, составное подлежащее какое-то? хотя бы не сказуемое 
+export const buttonSubmit = document.querySelector('#submitButton');
 
 //состязание лингвистов окончилось победой формальной логики построения кода. чёрт! 
 
@@ -30,6 +27,7 @@ export const popups = document.querySelectorAll('.popup');
 
 export const userName = document.querySelector('#userName');
 export const userStatus = document.querySelector('#userStatus');
+export const userAvatar = document.querySelector('#userAvatar').src;
 
 //новенькие в блоке, покажите им клуб кожевников 
 

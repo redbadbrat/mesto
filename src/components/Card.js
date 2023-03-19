@@ -29,6 +29,11 @@ export default class Card {
         this._newCard = null;
     }
 
+    //вы не сможете тыкнуть на кнопку если кнопки нет
+    preventDeletion() {
+        this._newCard.querySelector('.element__delete-button').classList.add('button_hidden');
+    } 
+
     _handleLikeClick () {
         this._currentLike.classList.toggle(this._templateSettings.likeClickedSelector);
     }
