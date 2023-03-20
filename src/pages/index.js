@@ -147,6 +147,23 @@ const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
   }
 );
 
+const popupWithFormAvatar = new PopupWithForm(popupTypesList.popupAvatar,
+  (inputValues) => {
+    showLoading(true);
+    api.editUserProfile(inputValues)
+    .then((inputValues) => {
+      currentUserInfo.setUserInfo(inputValues.name, inputValues.about);
+    })
+    .catch(error => {
+      showErrorMessage(error);
+    })
+    .finally(() => {
+      showLoading(false);
+      popupWithFormProfile.close()
+    })
+  }
+);
+
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
 
