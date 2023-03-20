@@ -12,10 +12,10 @@ import {profileForm,
   userStatus,
   validationSettings,
   cardCreationSettings,
-  startingCards,
   popupTypesList, 
   buttonSubmit,
-  userAvatar} from '../utils/variables.js';
+  userAvatar,
+  popupChangeAvatarOpen} from '../utils/variables.js';
 
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
@@ -27,6 +27,8 @@ import API from '../components/API';
 import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
 //все переменные репатриировались в variables.js. и правильно сделали
+
+//АЛЯРМА! Все запросы к серверу разбиты на задачи (а не сгруппированы) в учебных целях. Честное слово, я не очень табуретка, просто так легче дебажить - по слогам
 
 //------сектор подрубания API------
   
@@ -40,19 +42,19 @@ const api = new API({
 
 //------сектор вспомогательный------
 
-function showLoading() {
-  buttonSubmit.textContent = 'Сохранение...';
+function showLoading(res) {
+  if (res) {
+    buttonSubmit.textContent = 'Сохранение...';
+  } else {
+    buttonSubmit.textContent = 'Сохранить'
+  }
 }
 
 showLoading;
 
-api.getUserData()
-  .then(userData => {
-    console.log(userData.name);
-  })
-  .catch(error => {
-    console.error('Error fetching user data:', error);
-  });
+function showErrorMessage(error) {
+  console.error('Упс, всё сломалось! Мы продобались, код ошибки: ', error);
+}
 
 //------сектор валидации------
 
@@ -61,6 +63,26 @@ const formNameValidator = new FormValidator(profileForm, validationSettings);
 
 formAddValidator.enableValidation();
 formNameValidator.enableValidation();
+
+//------сектор юзеринфо и кардлист------
+
+const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
+
+api.getUserData()
+  .then(userData => {
+    currentUserInfo.setUserInfo(userData.name, userData.about, userData.avatar)
+  })
+  .catch(error => {
+    showErrorMessage(error);
+  });
+
+const cardList = new Section({
+    renderer: (inputValues) => {
+      const newCardElement = createCard(inputValues);
+      cardList.addDefaultItem(newCardElement);
+    }
+  }, 
+  cardsZone);
 
 //------сектор создания и генерёжки карточек------
 
@@ -79,34 +101,49 @@ function createCard(inputValues) {
   return newCardElement;
 };
 
-const cardList = new Section({
-  items: startingCards, 
-  renderer: (inputValues) => {
-  const newCardElement = createCard(inputValues);
-  cardList.addDefaultItem(newCardElement);
-}}, 
-cardsZone);
-
-cardList.renderElements();
-
-//------сектор юзеринфо------
-
-const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
+api.getInitialCards()
+  .then(initialCards => {
+    cardList.renderElements(initialCards);
+  })
+  .catch(error => {
+    showErrorMessage(error);
+  });
 
 //------сектор попапов------
 
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
   (inputValues) => {
-    const newCardElement = createCard(inputValues);
-    cardList.addItem(newCardElement);
-    popupWithFormAdd.close();
+    showLoading(true);
+    api.postNewCard(inputValues)
+      .then((inputValues) => {
+        const newCardElement = createCard(inputValues);
+        cardList.addItem(newCardElement);
+      })
+      .catch(error => {
+        showErrorMessage(error);
+        console.log('Произошла ошибка. При перезагруке страницы карточка не сохранится :(')
+      })
+      .finally(() => {
+        showLoading(false);
+        popupWithFormAdd.close();
+      })
   }
 );
 
 const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
   (inputValues) => {
-    currentUserInfo.setUserInfo(inputValues.name, inputValues.status)
-    popupWithFormProfile.close();
+    showLoading(true);
+    api.editUserProfile(inputValues)
+    .then((inputValues) => {
+      currentUserInfo.setUserInfo(inputValues.name, inputValues.about);
+    })
+    .catch(error => {
+      showErrorMessage(error);
+    })
+    .finally(() => {
+      showLoading(false);
+      popupWithFormProfile.close()
+    })
   }
 );
 
@@ -125,6 +162,10 @@ namePopupButtonOpen.addEventListener('click', () => {
   popupWithFormProfile.open();
   console.log(currentUserInfo.getUserInfo())
 });
+
+popupChangeAvatarOpen.addEventListener('click', () => {
+  console.log('click-clack-clock')
+})
 
 //------Ашкелон------
 //------сектор газа------

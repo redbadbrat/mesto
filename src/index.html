@@ -22,15 +22,15 @@
         <main>
 
             <section class="profile">
-                <button class="profile__avatar-overlay popup-button"></button>
+                <button class="profile__avatar-overlay popup-button" id="openChangeAvatarOpen"></button>
                 <img class="profile__avatar" src="<%=require('./images/portrait2.jpg')%>" alt="ваш аватар. вы отлично выглядите сегодня!" id="userAvatar">
                 <div class="profile__profile-info">
                     <div class="profile__name-area">
                         <div class="profile__first-line">
-                            <h1 class="profile__name name" id="userName">Жак-Ив Кусто</h1>
+                            <h1 class="profile__name name" id="userName"></h1>
                             <button class="profile__edit-button popup-button button" aria-label="изменить профиль" id="openNamePopupButton" type="button"></button>
                         </div>
-                        <p class="profile__status status" id="userStatus">Исследователь океана</p>
+                        <p class="profile__status status" id="userStatus"></p>
                     </div>
                     <button class="profile__add-button popup-button button" aria-label="добавить карточку" id="openAddPopupButton" type="button"></button>
                 </div>
@@ -122,7 +122,7 @@
                 <button class="popup__close-button button" type="button" id="closeAvatarPopupButton"></button>
                 <div class="popup__container popup-avatar__container">
                     <h2 class="popup__header popup-avatar__header">Обновить аватар</h2>
-                    <form class="popup-avatar__form form popup__form" name="form" method="post" id="avatarForm" novalidate>
+                    <form class="popup-avatar__form form popup__form" name="form" method="post" id="formAvatar" novalidate>
                         <fieldset class="popup__fieldset-profile fieldset">
                             <input class="input" type="url" placeholder="Какой вы сегодня?" 
                             name="avatar" id="input-avatar" required>

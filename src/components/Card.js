@@ -1,6 +1,5 @@
 //так как ООП заняло у меня время, я объясняю сама себе свои действия. прямо по строкам. надеюсь, вас это не раздражает
 export default class Card {
-    //я видела заметку про передачу объекта, я тоже думала об этом - сделаю, но сейчас tight on time, перепишу в свободную минутку. спасибо
     constructor(data, templateSettings, handleCardClick, handleCardDeletionPopup) {
         this._templateSettings = templateSettings;
         this._name = data.name; //переписала передачу через объект

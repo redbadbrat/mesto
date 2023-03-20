@@ -32,7 +32,9 @@ export default class API {
             headers: this._headers
         })
         .then(res => {
-            this.checker(res);
+            //баг репорт: без добавления return код не работал - в вызове метода объекта класса с юзер датой всё было ок,
+            //а вот при вызове карточек - undefined. при этом юзер дате return не был нужен - работало и без него. што
+            return this.checker(res);
         })
     }
 
@@ -41,10 +43,13 @@ export default class API {
         return fetch(currentURL , {
             method: 'PATCH',
             headers: this._headers,
-            body: JSON.stringify(userInfo)
+            body: JSON.stringify({      
+                name: userInfo.name,
+                about: userInfo.status
+            })
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
   
@@ -56,7 +61,7 @@ export default class API {
             body: JSON.stringify(cardInfo)
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 
@@ -81,7 +86,7 @@ export default class API {
             headers: this._headers,
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 
@@ -92,7 +97,7 @@ export default class API {
             headers: this._headers,
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 
@@ -103,7 +108,7 @@ export default class API {
             headers: this._headers,
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 
@@ -115,7 +120,7 @@ export default class API {
             body: JSON.stringify(avatar)
         })
         .then(res => {
-            this.checker(res);
+            return this.checker(res);
         })
     }
 

@@ -15,6 +15,7 @@ export const cardsZone = document.querySelector('.elements');
 
 export const namePopupButtonOpen = document.querySelector('#openNamePopupButton'); //переименовано 
 export const popupAddButtonOpen = document.querySelector('#openAddPopupButton'); //переименовано 
+export const popupChangeAvatarOpen = document.querySelector('#openChangeAvatarOpen');
 export const buttonSubmit = document.querySelector('#submitButton');
 
 //состязание лингвистов окончилось победой формальной логики построения кода. чёрт! 
@@ -27,7 +28,7 @@ export const popups = document.querySelectorAll('.popup');
 
 export const userName = document.querySelector('#userName');
 export const userStatus = document.querySelector('#userStatus');
-export const userAvatar = document.querySelector('#userAvatar').src;
+export const userAvatar = document.querySelector('#userAvatar');
 
 //новенькие в блоке, покажите им клуб кожевников 
 
@@ -58,9 +59,12 @@ export const popupSettings = {
 export const popupTypesList = {
     popupProfile: '#formPopup',
     popupAdd: '#formPopupCard',
+    popupAvatar: '#formAvatar',
     popupZoom: '#zoomPopup',
     popupCardDeletion: '#formDeletePopupButton'
 }
+
+//ура, легаси код
 
 export const startingCards = [
     {
