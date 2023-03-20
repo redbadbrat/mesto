@@ -42,16 +42,6 @@ const api = new API({
 
 //------сектор вспомогательный------
 
-function showLoading(res) {
-  if (res) {
-    buttonSubmit.textContent = 'Сохранение...';
-  } else {
-    buttonSubmit.textContent = 'Сохранить'
-  }
-}
-
-showLoading;
-
 function showErrorMessage(error) {
   console.error('Упс, всё сломалось! Мы продобались, код ошибки: ', error);
 }
@@ -70,7 +60,8 @@ const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
 
 api.getUserData()
   .then(userData => {
-    currentUserInfo.setUserInfo(userData.name, userData.about, userData.avatar)
+    currentUserInfo.setUserInfo(userData.name, userData.about)
+    currentUserInfo.setUserAvatar(userData.avatar)
   })
   .catch(error => {
     showErrorMessage(error);
@@ -113,7 +104,7 @@ api.getInitialCards()
 
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
   (inputValues) => {
-    showLoading(true);
+    popupWithFormAdd.showLoading(true);
     api.postNewCard(inputValues)
       .then((inputValues) => {
         const newCardElement = createCard(inputValues);
@@ -124,7 +115,7 @@ const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd,
         console.log('Произошла ошибка. При перезагруке страницы карточка не сохранится :(')
       })
       .finally(() => {
-        showLoading(false);
+        popupWithFormAdd.showLoading(false);
         popupWithFormAdd.close();
       })
   }
@@ -132,7 +123,7 @@ const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd,
 
 const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
   (inputValues) => {
-    showLoading(true);
+    popupWithFormProfile.showLoading(true);
     api.editUserProfile(inputValues)
     .then((inputValues) => {
       currentUserInfo.setUserInfo(inputValues.name, inputValues.about);
@@ -141,31 +132,32 @@ const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
       showErrorMessage(error);
     })
     .finally(() => {
-      showLoading(false);
+      popupWithFormProfile.showLoading(false);
       popupWithFormProfile.close()
     })
   }
 );
 
 const popupWithFormAvatar = new PopupWithForm(popupTypesList.popupAvatar,
-  (inputValues) => {
-    showLoading(true);
-    api.editUserProfile(inputValues)
-    .then((inputValues) => {
-      currentUserInfo.setUserInfo(inputValues.name, inputValues.about);
+  (inputValue) => {
+    popupWithFormAvatar.showLoading(true);
+    api.updateAvatar(inputValue)
+    .then((inputValue) => {
+      currentUserInfo.setUserAvatar(inputValue.avatar);
     })
     .catch(error => {
       showErrorMessage(error);
     })
     .finally(() => {
-      showLoading(false);
-      popupWithFormProfile.close()
+      popupWithFormAvatar.showLoading(false);
+      popupWithFormAvatar.close()
     })
   }
 );
 
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
+popupWithFormAvatar.setEventListeners();
 
 popupAddButtonOpen.addEventListener('click', () => {
   popupWithFormAdd.open();
@@ -181,7 +173,8 @@ namePopupButtonOpen.addEventListener('click', () => {
 });
 
 popupChangeAvatarOpen.addEventListener('click', () => {
-  console.log('click-clack-clock')
+  console.log('click-clack-clock');
+  popupWithFormAvatar.open();
 })
 
 //------Ашкелон------

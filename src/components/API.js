@@ -112,12 +112,13 @@ export default class API {
         })
     }
 
-    updateAvatar(avatar) {
+    updateAvatar(userInfo) {
         const currentURL = `${this._url + '/users/me/avatar'}`;
         return fetch(currentURL , {
             method: 'PATCH',
             headers: this._headers,
-            body: JSON.stringify(avatar)
+            body: JSON.stringify({
+                avatar: userInfo.avatar})
         })
         .then(res => {
             return this.checker(res);

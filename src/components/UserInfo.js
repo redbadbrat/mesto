@@ -16,10 +16,13 @@ export default class UserInfo {
         return userData;
     }
 
-    setUserInfo(name, status, avatar) {
+    setUserInfo(name, status) {
         //ну, он эти данные ещё и запихивает на страницу
         this._userName.textContent = name;
         this._userStatus.textContent = status;
+    }
+
+    setUserAvatar(avatar) {
         this._userAvatar.src = avatar;
     }
 }

@@ -6,6 +6,7 @@ export default class PopupWithForm extends Popup {
         this._form = this._popup.querySelector('.form');
         this._submitCallback = submitCallback;
         this._inputList = this._popup.querySelectorAll('.input');
+        this._submitButton = this._popup.querySelector('.popup__submit-button');
     }
 
     //этот класс занял у меня нервных клеток больше, чем курсовые 2-4 курсов в институте
@@ -31,6 +32,15 @@ export default class PopupWithForm extends Popup {
             event.preventDefault();
             this._submitCallback(this._getInputValues())
           });
+    }
+
+    
+    showLoading(res) {
+        if (res) {
+            this._submitButton.textContent = 'Сохранение...';
+        } else {
+            this._submitButton.textContent = 'Сохранить';
+        }
     }
 
 }

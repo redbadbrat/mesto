@@ -59,7 +59,7 @@ export const popupSettings = {
 export const popupTypesList = {
     popupProfile: '#formPopup',
     popupAdd: '#formPopupCard',
-    popupAvatar: '#formAvatar',
+    popupAvatar: '#avatarPopup',
     popupZoom: '#zoomPopup',
     popupCardDeletion: '#formDeletePopupButton'
 }
