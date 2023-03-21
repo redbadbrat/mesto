@@ -125,7 +125,4 @@ export default class API {
         })
     }
 
-    showUpdate() {
-        
-    }
 }

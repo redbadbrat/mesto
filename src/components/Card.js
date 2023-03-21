@@ -4,6 +4,7 @@ export default class Card {
         this._templateSettings = templateSettings;
         this._name = data.name; //переписала передачу через объект
         this._link = data.link;
+        this._id = data._id;
         this._handleCardClick = handleCardClick;
         this._handleCardDeletionPopup = handleCardDeletionPopup;
     }
@@ -22,6 +23,9 @@ export default class Card {
         return this._currentLike;
     }
 
+    getId() {
+        return this._id;
+    }
   
     handleCardDelete() {
         this._newCard.remove();

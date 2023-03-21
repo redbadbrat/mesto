@@ -75,22 +75,33 @@ const cardList = new Section({
   }, 
   cardsZone);
 
-//------сектор создания и генерёжки карточек------
+//------сектор создания, удаления и генерёжки карточек------
 
 const zoomedCard = new PopupWithImage(popupTypesList.popupZoom);
 zoomedCard.setEventListeners();
-const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion);
-deletionPopup.setEventListeners();
 
 function createCard(inputValues) {
   const newCard = new Card(inputValues, cardCreationSettings, 
                   () => {zoomedCard.open(inputValues.name, inputValues.link)},
-                  () => {}
+                  () => {openDeletionPopup(newCard)}
   )
 
   const newCardElement = newCard.createCard();
   return newCardElement;
 };
+
+function deleteCard(card) {
+  //deletionPopup.open();
+  const id = getId(card);
+  api.deleteCard(id)
+  .then(() => {
+    deletionPopup.close();
+    card.handleCardDelete();
+  })
+  .catch(error => {
+    showErrorMessage(error);
+  });
+}
 
 api.getInitialCards()
   .then(initialCards => {
@@ -100,13 +111,15 @@ api.getInitialCards()
     showErrorMessage(error);
   });
 
+
+
 //------сектор попапов------
 
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
   (inputValues) => {
     popupWithFormAdd.showLoading(true);
     api.postNewCard(inputValues)
-      .then((inputValues) => {
+      .then(inputValues => {
         const newCardElement = createCard(inputValues);
         cardList.addItem(newCardElement);
       })
@@ -155,9 +168,14 @@ const popupWithFormAvatar = new PopupWithForm(popupTypesList.popupAvatar,
   }
 );
 
+const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion, {
+
+});
+
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
 popupWithFormAvatar.setEventListeners();
+deletionPopup.setEventListeners();
 
 popupAddButtonOpen.addEventListener('click', () => {
   popupWithFormAdd.open();
@@ -175,7 +193,9 @@ namePopupButtonOpen.addEventListener('click', () => {
 popupChangeAvatarOpen.addEventListener('click', () => {
   console.log('click-clack-clock');
   popupWithFormAvatar.open();
-})
+});
+
+
 
 //------Ашкелон------
 //------сектор газа------

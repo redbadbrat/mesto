@@ -61,7 +61,7 @@ export const popupTypesList = {
     popupAdd: '#formPopupCard',
     popupAvatar: '#avatarPopup',
     popupZoom: '#zoomPopup',
-    popupCardDeletion: '#formDeletePopupButton'
+    popupCardDeletion: '#formDeletePopupButton',
 }
 
 //ура, легаси код
