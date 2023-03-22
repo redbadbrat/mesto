@@ -62,6 +62,7 @@ api.getUserData()
   .then(userData => {
     currentUserInfo.setUserInfo(userData.name, userData.about)
     currentUserInfo.setUserAvatar(userData.avatar)
+    currentUserInfo.setUserId(userData._id)
   })
   .catch(error => {
     showErrorMessage(error);
@@ -85,22 +86,45 @@ const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion
 );
 
 function createCard(inputValues) {
-  const newCard = new Card(inputValues, cardCreationSettings, 
+  const newCard = new Card(inputValues, cardCreationSettings,
+                  currentUserInfo.returnUserId(),
                   () => {zoomedCard.open(inputValues.name, inputValues.link)},
-                  () => {deletionPopup.open(newCard)}
+                  () => {deletionPopup.open(newCard)},
+                  () => {addLike(newCard)},
+                  () => {deleteLike(newCard)}
   )
-
   const newCardElement = newCard.createCard();
   return newCardElement;
 };
 
 function deleteCard(card) {
-  //deletionPopup.open();
-  //const id = getId(card);
-  api.deleteCard(card.id)
+  api.deleteCard(card.getCardId())
   .then(() => {
     deletionPopup.close();
     card.handleCardDelete();
+  })
+  .catch(error => {
+    showErrorMessage(error);
+  });
+}
+
+function addLike(card) {
+  api.addLike(card.getCardId())
+  .then((res) => {
+    console.log('AAAAAAAAA')
+    card.handleLikeClick();
+    card.handleLikeCounter(res.likes);
+  })
+  .catch(error => {
+    showErrorMessage(error);
+  });
+}
+
+function deleteLike(card) {
+  api.deleteLike(card.getCardId())
+  .then((res) => {
+    card.handleLikeClick();
+    card.handleLikeCounter(res.likes);
   })
   .catch(error => {
     showErrorMessage(error);
@@ -189,9 +213,10 @@ namePopupButtonOpen.addEventListener('click', () => {
 });
 
 popupChangeAvatarOpen.addEventListener('click', () => {
-  console.log('click-clack-clock');
   popupWithFormAvatar.open();
 });
+
+console.log(currentUserInfo.returnUserId());
 
 
 

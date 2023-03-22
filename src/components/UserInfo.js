@@ -1,9 +1,9 @@
 export default class UserInfo {
-    constructor(userNameSelector, userStatusSelector, userAvatarSelector, userID){
+    constructor(userNameSelector, userStatusSelector, userAvatarSelector, userId){
         this._userName = userNameSelector;
         this._userStatus = userStatusSelector;
         this._userAvatar = userAvatarSelector;
-        this._userID = userID;
+        this._userId = userId;
     }
 
     getUserInfo() {
@@ -11,7 +11,7 @@ export default class UserInfo {
             currentName: this._userName.textContent,
             currentStatus: this._userStatus.textContent,
             currentAvatar: this._userAvatar.src,
-            ID: this._userID
+            ID: this._userId
         }
         return userData;
     }
@@ -24,5 +24,13 @@ export default class UserInfo {
 
     setUserAvatar(avatar) {
         this._userAvatar.src = avatar;
+    }
+
+    setUserId(id) {
+        this._userId = id;
+    }
+
+    returnUserId() {
+        return this._userId;
     }
 }

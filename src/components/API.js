@@ -65,20 +65,6 @@ export default class API {
         })
     }
 
-    /*showLikeCount() {
-        const currentURL = `${this._url + '/cards'}`;
-        return fetch(currentURL , {
-            method: 'POST',
-            headers: {
-                authorization: this._headers
-            },
-            body: JSON.stringify(cardInfo)
-        })
-        .then(res => {
-            this.checker(res);
-        })
-    }*/
-
     deleteCard(cardID) {
         const currentURL = `${this._url + '/cards/' + cardID}`;
         return fetch(currentURL , {
