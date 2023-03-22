@@ -80,10 +80,14 @@ const cardList = new Section({
 const zoomedCard = new PopupWithImage(popupTypesList.popupZoom);
 zoomedCard.setEventListeners();
 
+const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion,
+                      (card) => {deleteCard(card)}
+);
+
 function createCard(inputValues) {
   const newCard = new Card(inputValues, cardCreationSettings, 
                   () => {zoomedCard.open(inputValues.name, inputValues.link)},
-                  () => {openDeletionPopup(newCard)}
+                  () => {deletionPopup.open(newCard)}
   )
 
   const newCardElement = newCard.createCard();
@@ -92,8 +96,8 @@ function createCard(inputValues) {
 
 function deleteCard(card) {
   //deletionPopup.open();
-  const id = getId(card);
-  api.deleteCard(id)
+  //const id = getId(card);
+  api.deleteCard(card.id)
   .then(() => {
     deletionPopup.close();
     card.handleCardDelete();
@@ -110,8 +114,6 @@ api.getInitialCards()
   .catch(error => {
     showErrorMessage(error);
   });
-
-
 
 //------сектор попапов------
 
@@ -167,10 +169,6 @@ const popupWithFormAvatar = new PopupWithForm(popupTypesList.popupAvatar,
     })
   }
 );
-
-const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion, {
-
-});
 
 popupWithFormAdd.setEventListeners();
 popupWithFormProfile.setEventListeners();
