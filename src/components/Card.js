@@ -7,7 +7,7 @@ export default class Card {
         this._cardId = data._id;
         this._cardOwnerId = data.owner._id;
         this._myId = myId;
-        this._likeAmount = data.likes;
+        this._likes = data.likes;
         this._handleCardClick = handleCardClick;
         this._handleCardDeletion = handleCardDeletion;
         this._handleLike = handleLike;
@@ -46,18 +46,23 @@ export default class Card {
         }
     } 
 
-    handleLikeClick() {
-        this._currentLike.classList.toggle(this._templateSettings.likeClickedSelector);
-    }
-
-    handleLikeState() {
-        if (this._currentLike.classList.contains(this._templateSettings.likeClickedSelector)) {
-            this._handleLike();
-        } else {
-            this._handleDeleteLike();
+    _isLiked() {
+        if (this._likes.some(user => user._id === this._myId)) {
+            this._newCard.querySelector('.element__like-button').classList.add(this._templateSettings.likeClickedSelector);
         }
     }
-      
+
+    handleLikeClick() {
+        if (this._currentLike.classList.contains(this._templateSettings.likeClickedSelector)) {
+            this._newCard.querySelector('.element__like-button').classList.remove(this._templateSettings.likeClickedSelector);
+            this._handleDeleteLike();
+        } else {
+            this._newCard.querySelector('.element__like-button').classList.add(this._templateSettings.likeClickedSelector);
+            this._handleLike();
+            this.handleLikeCounter(this._likes);
+            console.log(this.handleLikeCounter(this._likes))
+        }
+    }
     
     handleLikeCounter (array) {
         this._likeCounter = this._newCard.querySelector('.element__like-counter');
@@ -86,7 +91,8 @@ export default class Card {
         this._newCard = this._getCardTemplate();
         this._setListeners();
         this._setData();
-        this.handleLikeCounter(this._likeAmount);
+        this.handleLikeCounter(this._likes);
+        this._isLiked();
   
         return this._newCard;
   }

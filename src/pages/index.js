@@ -99,7 +99,7 @@ function createCard(inputValues) {
 
 function deleteCard(card) {
   api.deleteCard(card.getCardId())
-  .then(() => {
+  .then((res) => {
     deletionPopup.close();
     card.handleCardDelete();
   })
@@ -111,8 +111,7 @@ function deleteCard(card) {
 function addLike(card) {
   api.addLike(card.getCardId())
   .then((res) => {
-    console.log('AAAAAAAAA')
-    card.handleLikeClick();
+    console.log('AAAAAAAAA');
     card.handleLikeCounter(res.likes);
   })
   .catch(error => {
@@ -123,7 +122,6 @@ function addLike(card) {
 function deleteLike(card) {
   api.deleteLike(card.getCardId())
   .then((res) => {
-    card.handleLikeClick();
     card.handleLikeCounter(res.likes);
   })
   .catch(error => {
