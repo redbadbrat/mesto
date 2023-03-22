@@ -12,8 +12,7 @@ import {profileForm,
   userStatus,
   validationSettings,
   cardCreationSettings,
-  popupTypesList, 
-  buttonSubmit,
+  popupTypesList,
   userAvatar,
   popupChangeAvatarOpen} from '../utils/variables.js';
 

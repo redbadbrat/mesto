@@ -16,7 +16,6 @@ export const cardsZone = document.querySelector('.elements');
 export const namePopupButtonOpen = document.querySelector('#openNamePopupButton'); //переименовано 
 export const popupAddButtonOpen = document.querySelector('#openAddPopupButton'); //переименовано 
 export const popupChangeAvatarOpen = document.querySelector('#openChangeAvatarOpen');
-export const buttonSubmit = document.querySelector('#submitButton');
 
 //состязание лингвистов окончилось победой формальной логики построения кода. чёрт! 
 
