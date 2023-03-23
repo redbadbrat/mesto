@@ -146,14 +146,17 @@ const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd,
         const newCardElement = createCard(inputValues);
         cardList.addItem(newCardElement);
       })
+      //добавили карточки и подождали, всё ок. вырубили лоадер и закрыли попан.
+      .then(() => {
+        popupWithFormAdd.showLoading(false);
+        popupWithFormAdd.close();
+      })
       .catch(error => {
         showErrorMessage(error);
         console.log('Произошла ошибка. При перезагруке страницы карточка не сохранится :(')
       })
-      .finally(() => {
-        popupWithFormAdd.showLoading(false);
-        popupWithFormAdd.close();
-      })
+      /*.finally(() => {
+      })*/
   }
 );
 
