@@ -43,7 +43,8 @@ export const cardCreationSettings = {
     templateElementSelector: '#card',
     elementSelector: '.element',
     likeButtonSelector: '.element__like-button',
-    likeClickedSelector: 'element__like-button_clicked'
+    likeClickedSelector: 'element__like-button_clicked',
+    likeCounter: '.element__like-counter'
 };
 
 //почему всё везде в объектах и их ТАК МНОГО?

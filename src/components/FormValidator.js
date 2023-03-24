@@ -29,25 +29,25 @@ export default class FormValidator {
   }
 
   _hasInvalidInput() {
-    return this.inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
   disableSubmitButton() {
-    this.buttonElement.classList.add(this._settings.buttonDisabled);
-    this.buttonElement.disabled = true;
+    this._buttonElement.classList.add(this._settings.buttonDisabled);
+    this._buttonElement.disabled = true;
   }
 
   _enableSubmitButton() {
-    this.buttonElement.classList.remove(this._settings.buttonDisabled);
-    this.buttonElement.disabled = false;
+    this._buttonElement.classList.remove(this._settings.buttonDisabled);
+    this._buttonElement.disabled = false;
   }
 
   //я всё же оставила тоггл, потому что его основная роль - проверка, однако теперь он имеет в логике лишь 2 функции.
 
   _toggleSubmitButton() {
-    if (this._hasInvalidInput(this.inputList)) {
+    if (this._hasInvalidInput(this._inputList)) {
       this.disableSubmitButton();
     } else {
       this._enableSubmitButton();
@@ -55,11 +55,11 @@ export default class FormValidator {
   }
 
   _setEventListeners() {
-    this.inputList = Array.from(this._formElement.querySelectorAll('.input'));
-    this.buttonElement = this._formElement.querySelector(this._settings.buttonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll('.input'));
+    this._buttonElement = this._formElement.querySelector(this._settings.buttonSelector);
     this._toggleSubmitButton();
 
-    this.inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         this._toggleSubmitButton();

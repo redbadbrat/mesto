@@ -30,6 +30,7 @@ export default class Card {
     _findCurrentLikeButton() {
         this._currentLike = this._newCard.querySelector(this._templateSettings.likeButtonSelector);
         return this._currentLike;
+        //новый _findCurrentLikeButton() - теперь со вкусом двойного использования в классе!
     }
   
     handleCardDelete() {
@@ -46,53 +47,64 @@ export default class Card {
         }
     } 
 
-    _isLiked() {
+    /*_isLiked() {
         if (this._likes.some(user => user._id === this._myId)) {
             this._newCard.querySelector('.element__like-button').classList.add(this._templateSettings.likeClickedSelector);
         }
+    }*/
+
+    _isLiked() {
+        return this._likes.some(user => user._id === this._myId)
     }
 
-    handleLikeClick() {
+    _updateLikesView() {
+        this._findCurrentLikeButton();
+        this._likeCounter = this._newCard.querySelector(this._templateSettings.likeCounter);
+        this._likeCounter.textContent = this._likes.length;
+        if (this._isLiked())
+            this._currentLike.classList.add(this._templateSettings.likeClickedSelector);
+        else 
+            this._currentLike.classList.remove(this._templateSettings.likeClickedSelector);
+    } 
+
+    _handleLikeClick() {
         if (this._currentLike.classList.contains(this._templateSettings.likeClickedSelector)) {
-            this._newCard.querySelector('.element__like-button').classList.remove(this._templateSettings.likeClickedSelector);
+            this._currentLike.classList.remove(this._templateSettings.likeClickedSelector);
             this._handleDeleteLike();
         } else {
-            this._newCard.querySelector('.element__like-button').classList.add(this._templateSettings.likeClickedSelector);
+            this._currentLike.classList.add(this._templateSettings.likeClickedSelector);
             this._handleLike();
-            this.handleLikeCounter(this._likes);
-            console.log(this.handleLikeCounter(this._likes))
+            //НЛО прилетело и оставило это сообщение здесь
         }
+        this._updateLikesView(); 
     }
     
     handleLikeCounter (array) {
-        this._likeCounter = this._newCard.querySelector('.element__like-counter');
-        this._likeCounter.textContent = array.length;
+        this._likes = array;
+        this._updateLikesView();
     }
 
     _setListeners () {
         this._findCurrentLikeButton();
-        this._newCard.querySelector('.element__like-button').addEventListener('click', () => this.handleLikeClick()); 
+        this._currentLike.addEventListener('click', () => this._handleLikeClick()); 
         this._newCard.querySelector('.element__image-overlay').addEventListener('click', this._handleCardClick);
         this._preventUnwantedDeletion();
     }
     
     _setData () {
-      const linkProp = this._newCard.querySelector('.element__image');
-      linkProp.src = this._link;
-  
-      const captionProp = this._newCard.querySelector('.element__caption');
-      captionProp.textContent = this._name;
-  
-      const altProp = this._newCard.querySelector('.element__image');
-      altProp.alt = this._name;
+        this._cardImage = this._newCard.querySelector('.element__image');
+        this._cardImage.src = this._link;
+        this._cardImage.alt = this._name;
+        this._cardCaption = this._newCard.querySelector('.element__caption');
+        this._cardCaption.textContent = this._name;
+        //hi! my name is. what? my names is. who? my name is. this
   }
   
     createCard () {
         this._newCard = this._getCardTemplate();
         this._setListeners();
         this._setData();
-        this.handleLikeCounter(this._likes);
-        this._isLiked();
+        this._updateLikesView();
   
         return this._newCard;
   }

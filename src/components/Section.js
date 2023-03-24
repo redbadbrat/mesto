@@ -19,10 +19,10 @@ export default class Section {
         this._container.append(element);
     }    
 
-    renderElements(elements) {
+    renderElements(elements, myId) {
         this.erase;
         elements.forEach(item => {
-            this._renderer(item);
+            this._renderer(item, myId);
         });
     }
 }

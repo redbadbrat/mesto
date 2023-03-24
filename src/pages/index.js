@@ -27,7 +27,7 @@ import PopupWithConfirmation from '../components/PopupWithConfirmation';
 
 //все переменные репатриировались в variables.js. и правильно сделали
 
-//АЛЯРМА! Все запросы к серверу разбиты на задачи (а не сгруппированы) в учебных целях. Честное слово, я не очень табуретка, просто так легче дебажить - по слогам
+//АЛЯРМА! я табурека
 
 //------сектор подрубания API------
   
@@ -55,25 +55,15 @@ formNameValidator.enableValidation();
 
 //------сектор юзеринфо и кардлист------
 
-const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
-
-api.getUserData()
-  .then(userData => {
-    currentUserInfo.setUserInfo(userData.name, userData.about)
-    currentUserInfo.setUserAvatar(userData.avatar)
-    currentUserInfo.setUserId(userData._id)
-  })
-  .catch(error => {
-    showErrorMessage(error);
-  });
-
 const cardList = new Section({
-    renderer: (inputValues) => {
-      const newCardElement = createCard(inputValues);
+    renderer: (inputValues, myId) => {
+      const newCardElement = createCard(inputValues, myId);
       cardList.addDefaultItem(newCardElement);
     }
   }, 
   cardsZone);
+
+  const currentUserInfo = new UserInfo(userName, userStatus, userAvatar);
 
 //------сектор создания, удаления и генерёжки карточек------
 
@@ -84,9 +74,9 @@ const deletionPopup = new PopupWithConfirmation(popupTypesList.popupCardDeletion
                       (card) => {deleteCard(card)}
 );
 
-function createCard(inputValues) {
+function createCard(inputValues, myId) {
   const newCard = new Card(inputValues, cardCreationSettings,
-                  currentUserInfo.returnUserId(),
+                  myId,
                   () => {zoomedCard.open(inputValues.name, inputValues.link)},
                   () => {deletionPopup.open(newCard)},
                   () => {addLike(newCard)},
@@ -98,7 +88,7 @@ function createCard(inputValues) {
 
 function deleteCard(card) {
   api.deleteCard(card.getCardId())
-  .then((res) => {
+  .then(() => {
     deletionPopup.close();
     card.handleCardDelete();
   })
@@ -128,14 +118,6 @@ function deleteLike(card) {
   });
 }
 
-api.getInitialCards()
-  .then(initialCards => {
-    cardList.renderElements(initialCards);
-  })
-  .catch(error => {
-    showErrorMessage(error);
-  });
-
 //------сектор попапов------
 
 const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd, 
@@ -143,7 +125,7 @@ const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd,
     popupWithFormAdd.showLoading(true);
     api.postNewCard(inputValues)
       .then(inputValues => {
-        const newCardElement = createCard(inputValues);
+        const newCardElement = createCard(inputValues, currentUserInfo.returnUserId());
         cardList.addItem(newCardElement);
       })
       //добавили карточки и подождали, всё ок. вырубили лоадер и закрыли попан.
@@ -155,8 +137,6 @@ const popupWithFormAdd = new PopupWithForm(popupTypesList.popupAdd,
         showErrorMessage(error);
         console.log('Произошла ошибка. При перезагруке страницы карточка не сохранится :(')
       })
-      /*.finally(() => {
-      })*/
   }
 );
 
@@ -209,16 +189,25 @@ namePopupButtonOpen.addEventListener('click', () => {
   nameInput.value = profile.currentName; 
   statusInput.value = profile.currentStatus;
   popupWithFormProfile.open();
-  console.log(currentUserInfo.getUserInfo())
 });
 
 popupChangeAvatarOpen.addEventListener('click', () => {
   popupWithFormAvatar.open();
 });
 
-console.log(currentUserInfo.returnUserId());
+//------сектор пустых обещаний------
 
-
+Promise.all([api.getUserData(), api.getInitialCards()])
+  .then(([userData, initialCards]) => {
+    cardList.renderElements(initialCards, userData._id);
+    currentUserInfo.setUserInfo(userData.name, userData.about)
+    currentUserInfo.setUserAvatar(userData.avatar)
+    currentUserInfo.setUserId(userData._id)
+  })
+  .catch(error => {
+    console.log('все обещания пошли прахом.')
+    showErrorMessage(error);
+  });
 
 //------Ашкелон------
 //------сектор газа------
