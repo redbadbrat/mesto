@@ -47,19 +47,11 @@ export default class Card {
         }
     } 
 
-    /*_isLiked() {
-        if (this._likes.some(user => user._id === this._myId)) {
-            this._newCard.querySelector('.element__like-button').classList.add(this._templateSettings.likeClickedSelector);
-        }
-    }*/
-
     _isLiked() {
         return this._likes.some(user => user._id === this._myId)
     }
 
     _updateLikesView() {
-        this._findCurrentLikeButton();
-        this._likeCounter = this._newCard.querySelector(this._templateSettings.likeCounter);
         this._likeCounter.textContent = this._likes.length;
         if (this._isLiked())
             this._currentLike.classList.add(this._templateSettings.likeClickedSelector);
@@ -69,10 +61,8 @@ export default class Card {
 
     _handleLikeClick() {
         if (this._currentLike.classList.contains(this._templateSettings.likeClickedSelector)) {
-            this._currentLike.classList.remove(this._templateSettings.likeClickedSelector);
             this._handleDeleteLike();
         } else {
-            this._currentLike.classList.add(this._templateSettings.likeClickedSelector);
             this._handleLike();
             //НЛО прилетело и оставило это сообщение здесь
         }
@@ -102,6 +92,7 @@ export default class Card {
   
     createCard () {
         this._newCard = this._getCardTemplate();
+        this._likeCounter = this._newCard.querySelector(this._templateSettings.likeCounter);
         this._setListeners();
         this._setData();
         this._updateLikesView();

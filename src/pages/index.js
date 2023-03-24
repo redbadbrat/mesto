@@ -147,12 +147,12 @@ const popupWithFormProfile = new PopupWithForm(popupTypesList.popupProfile,
     .then((inputValues) => {
       currentUserInfo.setUserInfo(inputValues.name, inputValues.about);
     })
-    .catch(error => {
-      showErrorMessage(error);
-    })
-    .finally(() => {
+    .then(() => {
       popupWithFormProfile.showLoading(false);
       popupWithFormProfile.close()
+    })
+    .catch(error => {
+      showErrorMessage(error);
     })
   }
 );
@@ -164,12 +164,12 @@ const popupWithFormAvatar = new PopupWithForm(popupTypesList.popupAvatar,
     .then((inputValue) => {
       currentUserInfo.setUserAvatar(inputValue.avatar);
     })
-    .catch(error => {
-      showErrorMessage(error);
-    })
-    .finally(() => {
+    .then(() => {
       popupWithFormAvatar.showLoading(false);
       popupWithFormAvatar.close()
+    })
+    .catch(error => {
+      showErrorMessage(error);
     })
   }
 );
